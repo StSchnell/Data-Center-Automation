@@ -6,7 +6,7 @@ In a data center, configuration and change processes cause a high proportion of 
 
 ### Rhino
 
-The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMware Aria Automation runtime environments. It is programmed in Java and generates a class from the compiled JavaScript code. It was bundled with Java SE 6 and used as a programming interface in some business products. Rhino can be used with Java 8 and above and is mostly compatible with the ECMAScript 5 standard.
+The [Rhino](https://github.com/mozilla/rhino){:target="_blank"} JavaScript engine is part of VMware Aria Automation runtime environments. It is programmed in Java and generates a class from the compiled JavaScript code. It was bundled with Java SE 6 and used as a programming interface in some business products. Rhino can be used with Java 8 and above and is mostly compatible with the ECMAScript 5 standard.
 
 ### LINQ - Library
 
