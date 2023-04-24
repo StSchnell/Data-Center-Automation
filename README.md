@@ -10,7 +10,9 @@ The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMwar
 
 ### LINQ - Library
 
-[linq](https://github.com/mihaifm/linq) is a JavaScript implementation of the .NET LINQ library. To use linq with Rhino, download the latest linq release. It is necessary to modify the source code of linq.js to the conditions of Rhino:
+[linq](https://github.com/mihaifm/linq) is a JavaScript implementation of the .NET LINQ library.
+
+To use linq with Rhino, download the latest linq release. It is necessary to modify the source code of linq.js to the conditions of Rhino:
 
 * Rhino does not support variable declaration with `let` and `const`, therefore these must be replaced by `var`.
 * Rhino does not support `export` declaration, therefore the line `export default Enumerable;` at the end must be deleted.
