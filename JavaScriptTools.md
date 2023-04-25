@@ -1,6 +1,6 @@
 # JavaScript Tools
 
-The following are some JavaScript tools that, or their results, can be used in the context of Rhino and VMware Aria Automation.
+The following are some JavaScript tools that, or their results, can be used in the context of VMware Aria Automation.
 
 ## Emscripten
 
