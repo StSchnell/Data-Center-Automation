@@ -1,6 +1,6 @@
 # JavaScript Libraries
 
-The following are some libraries that can be used in the context of Rhino and VMware Aria Automation.
+The following are some JavaScript libraries that can be used in the context of Rhino and VMware Aria Automation.
 
 ## LINQ
 
