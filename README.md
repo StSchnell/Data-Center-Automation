@@ -2,7 +2,7 @@
 
 In a data center, configuration and change processes cause a high proportion of the operating costs. Therefore it is worth automating IT processes in a data center infrastructure. This reduces the number of errors, simplifies the service configuration and increases their availability. This makes it possible to respond much more flexibly to new business requirements and to provide services more quickly.
 
-This repository looks at some developer perspectives on data center automation with VMware Aria Automation. 
+This repository looks at some developer perspectives on data center automation with VMware Aria Automation. In particular, the use of libraries and tools are focused here.
 
 ## VMware Aria Automation
 
