@@ -2,6 +2,8 @@
 
 The following are some JavaScript tools that, or their results, can be used in the context of VMware Aria Automation.
 
+<p align="center"><img src="images/bridge.png"></p>
+
 ## Emscripten
 
 [Emscripten](https://github.com/emscripten-core/emscripten) compiles C and C++ to WebAssembly.
