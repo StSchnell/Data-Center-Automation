@@ -4,7 +4,7 @@ In a data center, configuration and change processes cause a high proportion of 
 
 This repository looks at some developer perspectives on data center automation with VMware Aria Automation. In particular, the use of libraries and tools are focused here.
 
-<span align="center">![Newspaper seller](images/newspaperSeller.jpg)</span>
+<span align="center">![Newspaper seller](images/newspaperSeller.png)</span>
 
 ## VMware Aria Automation
 
