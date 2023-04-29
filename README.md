@@ -4,6 +4,8 @@ In a data center, configuration and change processes cause a high proportion of 
 
 This repository looks at some developer perspectives on data center automation with VMware Aria Automation. In particular, the use of libraries and tools are focused here.
 
+![Newspaper seller](images/newspaperSeller.jpg)
+
 ## VMware Aria Automation
 
 VMware Aria is a data center management platform that offers consistent handling of applications, infrastructures and services across different kind of clouds with a single common data model. A part of it is [VMware Aria Automation](https://www.vmware.com/products/aria-automation.html), a workflow automation platform with which complex data center infrastructure tasks can be automated or extended.
