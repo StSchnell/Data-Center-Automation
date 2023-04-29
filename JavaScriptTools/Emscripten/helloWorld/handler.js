@@ -32,8 +32,6 @@ exports.handler = (context, inputs, callback) => {
     const hello = helloWorld.cwrap("hello", null, ["string"]);
     hello("Stefan");
 
-
-
     let result = helloWorld._int_sqrt(4);
     console.log(result);
     console.log(helloWorld.ccall("int_sqrt", "number", ["number"], [25]));
