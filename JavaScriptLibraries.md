@@ -2,6 +2,8 @@
 
 The following are some JavaScript libraries that can be used in the context of VMware Aria Automation.
 
+<p align="center"><img src="images/pergola.png"></p>
+
 ## LINQ
 
 [linq](https://github.com/mihaifm/linq) is a JavaScript implementation of the .NET LINQ library.
