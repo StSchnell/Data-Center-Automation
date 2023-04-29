@@ -1,0 +1,1 @@
+emcc helloWorld.c -o helloWorld.js -s EXPORTED_FUNCTIONS=_hello,_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
