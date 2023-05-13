@@ -14,19 +14,9 @@ To use linq with Rhino, download the latest linq release. It is necessary to mod
 * Rhino does not support `export` declaration, therefore the line `export default Enumerable;` at the end must be deleted.
 * Rhino has no console window, therefore it is recommended to replace the code sequences `if (typeof console !== Types.Undefined) { console.log(...); }` with `java.lang.System.out.println(...)`.
 
-After these preparations you can load it in your code with `load` command and use it:
+After these preparations you can load it in your code with `load` command and use it.
 
-```js
-load("linq.js");
-
-var result = Enumerable.range(1, 10)
-  .where( function(i) { return i % 3 == 0 } )
-  .select( function(i) { return i * 10 } );
-
-java.lang.System.out.println(
-  JSON.stringify(result.toArray())
-); // [ 30, 60, 90 ]
-```
+You can find a [fork of linq](https://github.com/StSchnell/linq) here, with the additions to use it with the Rhino engine.
 
 ## Papa Parse
 
