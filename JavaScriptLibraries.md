@@ -8,14 +8,6 @@ The following are some JavaScript libraries that can be used in the context of V
 
 [linq](https://github.com/mihaifm/linq) is a JavaScript implementation of the .NET LINQ library.
 
-To use linq with Rhino, download the latest linq release. It is necessary to modify the source code of linq.js to the conditions of Rhino:
-
-* Rhino does not support variable declaration with `let` and `const`, therefore these must be replaced by `var`.
-* Rhino does not support `export` declaration, therefore the line `export default Enumerable;` at the end must be deleted.
-* Rhino has no console window, therefore it is recommended to replace the code sequences `if (typeof console !== Types.Undefined) { console.log(...); }` with `java.lang.System.out.println(...)`.
-
-After these preparations you can load it in your code with `load` command and use it.
-
 You can find a [fork of linq](https://github.com/StSchnell/linq) here, with the additions to use it with the Rhino engine.
 
 ## Papa Parse
