@@ -11,7 +11,7 @@ This repository looks at some developer perspectives on data center automation w
 VMware Aria is a data center management platform that offers consistent handling of applications, infrastructures and services across different kind of clouds with a single common data model. A part of it is [VMware Aria Automation](https://www.vmware.com/products/aria-automation.html), a workflow automation platform with which complex data center infrastructure tasks can be automated or extended.
 
 Four runtime environments are offered in VMware Aria Automation:
-* JavaScript with Rhino engine,
+* JavaScript with [Rhino engine](https://github.com/mozilla/rhino/),
 * [Node.js](https://nodejs.org),
 * PowerShell with PowerCLI and
 * Python.
