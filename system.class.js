@@ -1,5 +1,3 @@
-// Begin ---------------------------------------------------------------
-
 /**
  *  __  __                    _
  * |  \/  |                  | |
@@ -74,7 +72,7 @@ function WorkflowItemInfo(name, displayName) {
   };
 }
 
-// System class --------------------------------------------------------
+// System class
 
 var _context = new org.mozilla.javascript.Context();
 var _logMarker = null;
@@ -1701,5 +1699,3 @@ _SystemNS.prototype = {
 };
 
 var System = new _SystemNS();
-
-// End -----------------------------------------------------------------
