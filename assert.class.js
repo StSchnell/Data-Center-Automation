@@ -1,5 +1,3 @@
-// Begin ---------------------------------------------------------------
-
 /**
  *                                           _                    _
  *     /\                                   | |   O              | |
@@ -22,7 +20,7 @@
 
 var _assertNS = {
 
-  // Check methods =====================================================
+  // Check methods
 
   /**
    * Determines whether the passed value is an array.
@@ -356,7 +354,7 @@ var _assertNS = {
     return this.isUndefined(value) || this.isNull(value);
   },
 
-  // Assert methods ====================================================
+  // Assert methods
 
   /**
    * Tests for deep equality between the actual and expected
@@ -872,7 +870,7 @@ var _assertNS = {
     return thrown;
   },
 
-  // Test grouping methods =============================================
+  // Test grouping methods
 
   /**
    * Creates a block that groups several related tests.
@@ -1105,7 +1103,7 @@ var _assertNS = {
     System.log("Todo: " + String(todo));
   },
 
-  // Private utility methods ===========================================
+  // Private utility methods
 
   /**
    * Tests that actual error match the expected.
@@ -1278,7 +1276,7 @@ var _assertNS = {
     }
   },
 
-  // Classification properties =========================================
+  // Classification properties
 
   /**
    * Runtime category to define the possible duration of the unit test.<br>
@@ -1398,5 +1396,3 @@ var _assertNS = {
 };
 
 return _assertNS;
-
-// End -----------------------------------------------------------------
