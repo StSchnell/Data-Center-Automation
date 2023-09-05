@@ -22,11 +22,19 @@ The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMwar
 
 ## Emulation
 
-VMware Aria Automation offers a System class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements in the context of its JavaScript runtime environment. To use these methods outside of Aria Automation, a [library is available here to emulate the System class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment.
+Emulations imitate the behavior of functions. VMware Aria Automation offers, with the JavaScript runtime environment, a lot of classes, whose methods can be mocked-up on this way. This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment. The mock-up classes here bases on the same JavaScript engine used in Aria Automation, the Mozilla Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
 
-This **m**ock-**u**p of the **S**ystem **cl**ass, called Muscle, bases on the same JavaScript engine used in Aria Automation, the Mozilla Rhino engine. To use this system class it is necessary to use the Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
+### System Class
+
+VMware Aria Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements in the context of its JavaScript runtime environment. To use these methods outside of Aria Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
 
 To use this library in your code it is necessary to add `load("system.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
+
+### Command Class
+
+VMware Aria Automation offers a command class, to execute commands of the host operating system, in the context of the JavaScript runtime environment. To use the methods of the command class outside of Aria Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
+
+To use this library in your code it is necessary to add `load("command.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ## Libraries
 
