@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.3
+ * @version 0.2.4
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -1300,6 +1300,26 @@ _SystemNS.prototype = {
   },
 
   /**
+   * Checks if operating system is Linux.
+   *
+   * @function isLinux
+   * @returns {boolean}
+   */
+  isLinux : function() {
+    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("linux");
+  },
+
+  /**
+   * Checks if operating system is Mac OS.
+   *
+   * @function isMac
+   * @returns {boolean}
+   */
+  isMac : function() {
+    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("mac");
+  },
+  
+  /**
    * Returns true if object is not found.
    * Hint: The argument shallNotBeFound is an additional flag, to mock a result.
    *
@@ -1323,6 +1343,16 @@ _SystemNS.prototype = {
     return notFoundValue;
   },
 
+  /**
+   * Checks if operating system is Windows.
+   *
+   * @function isWindows
+   * @returns {boolean}
+   */
+  isWindows : function() {
+    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("windows");
+  },
+  
   /**
    * Logs a text in the system with INFO.
    *
