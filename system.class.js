@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.4
+ * @version 0.2.7
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -98,9 +98,9 @@ _SystemNS.prototype = {
       var rhinoVersion = this.getRhinoVersion();
       if (this.compareVersionNumber(rhinoVersion, "1.7.5") === 1) {
         // trimRight added to release 1.7.6 of Rhino
-        outText = text.toString().trimRight();
+        outText = String().trimRight();
       } else {
-        outText = text.toString().replace(/[\s]+$/g, "");
+        outText = String().replace(/[\s]+$/g, "");
       }
     }
     if (_logMarker) {
@@ -148,7 +148,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Clones an object.
+   * Clones an object.<br>
    * Hint: This method is not available in the standard.
    *
    * @param {object} object - Object to clone.
@@ -174,9 +174,8 @@ _SystemNS.prototype = {
    * @param {string} version1 - First version.
    * @param {string} version2 - Second version.
    * @returns {number}
-   *
-   * Returns 0 if they are equivalent
-   * Returns 1 version1 is greater than version2
+   * Returns 0 if they are equivalent<br>
+   * Returns 1 version1 is greater than version2<br>
    * Returns -1 version2 a is greater than version1
    *
    * @example
@@ -851,12 +850,11 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Gets the current time.
-   *
-   * @function getCurrentTime
+   * Gets the current time.<br>
    * Delivers the number of milliseconds elapsed since midnight at the
    * beginning of January 1, 1970, UTC.
    *
+   * @function getCurrentTime
    * @returns {number}
    *
    * @example
@@ -1043,7 +1041,7 @@ _SystemNS.prototype = {
     } catch (exception) {
       return object.getClass().getSimpleName();
     }
- },
+  },
 
   /**
    * Returns the ID for the given object.<br>
@@ -1300,7 +1298,8 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Checks if operating system is Linux.
+   * Checks if operating system is Linux.<br>
+   * Hint: This method is not available in the standard.
    *
    * @function isLinux
    * @returns {boolean}
@@ -1310,7 +1309,8 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Checks if operating system is Mac OS.
+   * Checks if operating system is Mac OS.<br>
+   * Hint: This method is not available in the standard.
    *
    * @function isMac
    * @returns {boolean}
@@ -1344,7 +1344,8 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Checks if operating system is Windows.
+   * Checks if operating system is Windows.<br>
+   * Hint: This method is not available in the standard.
    *
    * @function isWindows
    * @returns {boolean}
@@ -1600,6 +1601,20 @@ _SystemNS.prototype = {
   },
 
   /**
+   * Waits for keypress enter.
+   * Hint: This method is not available in the standard.
+   *
+   * @function waitEnter
+   */
+  waitEnter : function() {
+    this.log("Press Enter to continue");
+    try {
+      java.lang.System.in.read();
+    } catch (exception) {
+    }
+  },
+
+  /**
    * Waits for an external custom event.
    *
    * @function waitCustomEventUntil
@@ -1728,4 +1743,5 @@ _SystemNS.prototype = {
 
 };
 
+java.lang.System.setProperty("LOCAL_SIMULATION", "true");
 var System = new _SystemNS();
