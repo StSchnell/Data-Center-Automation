@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.7
+ * @version 0.2.8
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -145,6 +145,25 @@ _SystemNS.prototype = {
     return String(
       java.nio.file.Paths.get(root.toString(), toAdd.toString())
     );
+  },
+
+  /**
+   * Decodes a base64 encoded string.<br>
+   * Hint: This method is not available in the standard.
+   *
+   * @function base64ToString
+   * @param {string} value - Text to decode from base64.
+   * @returns {string}
+   */
+  base64ToString : function(value) {
+    if (typeof value === "undefined" || value === null) {
+      throw new Error("value argument can not be undefined or null");
+    }
+    return String(java.lang.String(
+        java.util.Base64.getDecoder().decode(
+          java.lang.String(value).getBytes()
+        )
+    ));
   },
 
   /**
@@ -1575,6 +1594,25 @@ _SystemNS.prototype = {
       }
     }
     java.lang.System.out.println(outText);
+  },
+
+  /**
+   * Encodes string to base64.<br>
+   * Hint: This method is not available in the standard.
+   *
+   * @function stringToBase64
+   * @param {string} value - Text to encode in base64.
+   * @returns {string}
+   */
+  stringToBase64 : function(value) {
+    if (typeof value === "undefined" || value === null) {
+      throw new Error("value argument can not be undefined or null");
+    }
+    return String(
+      java.util.Base64.getEncoder().encodeToString(
+        java.lang.String(value).getBytes()
+      )
+    );
   },
 
   /**
