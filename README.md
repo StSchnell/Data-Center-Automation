@@ -50,7 +50,7 @@ To use this library in your code it is necessary to add `load("bytebuffer.class.
 
 ### MimeAttachment Class
 
-VMware Aria Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of Aria Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
+VMware Aria Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of Aria Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/mimeattachment.class.js).
 
 To use this library in your code it is necessary to add `load("mimeattachment.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
