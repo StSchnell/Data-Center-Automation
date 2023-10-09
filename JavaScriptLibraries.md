@@ -25,3 +25,7 @@ You can find a [fork of linq](https://github.com/StSchnell/linq) here, with the 
 ## XDate
 
 [XDate](https://github.com/arshaw/xdate) is a JavaScript date library for parsing, formatting and manipulating dates.
+
+## JSHint
+
+[JSHint](https://github.com/jshint/jshint) is a JavaScript library for static code analysis for JavaScript.
