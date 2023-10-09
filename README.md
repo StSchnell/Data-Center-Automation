@@ -26,13 +26,13 @@ Emulations imitate the behavior of functions. VMware Aria Automation offers, wit
 
 ### System Class
 
-VMware Aria Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements in the context of its JavaScript runtime environment. To use these methods outside of Aria Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
+VMware Aria Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements. To use these methods outside of Aria Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
 
 To use this library in your code it is necessary to add `load("system.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ### Command Class
 
-VMware Aria Automation offers a command class, to execute commands of the host operating system, in the context of the JavaScript runtime environment. To use these methods outside of Aria Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
+VMware Aria Automation offers a command class, to execute commands of the host operating system. To use these methods outside of Aria Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
 
 To use this library in your code it is necessary to add `load("command.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
@@ -50,7 +50,7 @@ To use this library in your code it is necessary to add `load("bytebuffer.class.
 
 ### MimeAttachment Class
 
-VMware Aria Automation offers a mime attachment class, to describe mime attachments in the context of the JavaScript runtime environment. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of Aria Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
+VMware Aria Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of Aria Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
 
 To use this library in your code it is necessary to add `load("mimeattachment.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
