@@ -4,7 +4,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.1.0
+ * @version 0.2.0
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -15,21 +15,22 @@
 var MimeAttachment = function(file) {
 
   if (
-    typeof file === "undefined" ||
-    file === null ||
-    String(file).trim() === ""
+    typeof file !== "undefined" &&
+    file !== null &&
+    String(file).trim() !== ""
   ) {
-    throw new Error("file argument can not be undefined or null");
-  }
 
-  this.mimeType = "";
+    this.mimeType = "";
 
-  try {
-    this.name = System.extractFileName(file);
-    var path = java.nio.file.FileSystems.getDefault().getPath("", file);
-    this.content = java.nio.file.Files.readAllBytes(path);
-  } catch (exception) {
-    System.error(exception);
+    try {
+      this.name = System.extractFileName(file);
+      var path = java.nio.file.FileSystems.getDefault().getPath("", file);
+      this.buffer = java.nio.file.Files.readAllBytes(path);
+      this.content = String(java.lang.String(this.buffer));
+    } catch (exception) {
+      System.error(exception);
+    }
+
   }
 
 };
@@ -57,8 +58,7 @@ MimeAttachment.prototype = {
    *
    * @function write
    * @param {string} directory - Directory where to store the file.
-   * @param {string} filename - Optional filename<br>
-   *                            If null, it uses the mime attachment name.
+   * @param {string} filename - Optional filename (if null, use the mime attachment name).
    * @returns {File}
    */
   write : function(directory, filename) {
@@ -90,7 +90,11 @@ MimeAttachment.prototype = {
       java.nio.file.Files.deleteIfExists(path);
       java.nio.file.Files.createFile(path);
       var outputStream = java.nio.file.Files.newOutputStream(path);
-      outputStream.write(this.content);
+      if (this.buffer.getClassName() === "ByteBuffer") {
+        outputStream.write(this.buffer._byteBuffer);
+      } else {
+        outputStream.write(this.buffer);
+      }
       outputStream.close();
 
     } catch (exception) {
