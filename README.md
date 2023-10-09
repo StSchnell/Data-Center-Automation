@@ -38,7 +38,7 @@ To use this library in your code it is necessary to add `load("command.class.js"
 
 ### File Classes
 
-VMware Aria Automation offers a file, file reader and file writer class, to operate with and handle the access to text files, in the context of the JavaScript runtime environment. To use these methods outside of Aria Automation, a [library is available here to emulate the file classes](https://github.com/StSchnell/Data-Center-Automation/blob/main/file.class.js).
+VMware Aria Automation offers a file, file reader and file writer class, to operate with and handle the access to text files. To use these methods outside of Aria Automation, a [library is available here to emulate the file classes](https://github.com/StSchnell/Data-Center-Automation/blob/main/file.class.js).
 
 To use this library in your code it is necessary to add `load("file.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
