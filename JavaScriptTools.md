@@ -4,6 +4,12 @@ The following are some JavaScript tools that, or their results, can be used in t
 
 <p align="center"><img src="images/bridge.png"></p>
 
+## TypeScript
+
+Here an approach to show that it is very easy to integrate TypeScript, and also save the source code.
+
+Here a detailed description [how to integrate TypeScript code in VMware Aria Automation](https://blog.stschnell.de/).<br>The [example files are here available](JavaScriptTools/TypeScript/addNumbers) in this repository.
+
 ## C#
 
 Here an approach to show that it is very easy to integrate C#, and also save the source code. A little combination of the possibilities of the polyglot programming environment allows us to do this.
