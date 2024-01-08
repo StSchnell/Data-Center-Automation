@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.8
+ * @version 0.3.0
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -98,9 +98,9 @@ _SystemNS.prototype = {
       var rhinoVersion = this.getRhinoVersion();
       if (this.compareVersionNumber(rhinoVersion, "1.7.5") === 1) {
         // trimRight added to release 1.7.6 of Rhino
-        outText = String().trimRight();
+        outText = String(text).trimRight();
       } else {
-        outText = String().replace(/[\s]+$/g, "");
+        outText = String(text).replace(/[\s]+$/g, "");
       }
     }
     if (_logMarker) {
@@ -114,6 +114,38 @@ _SystemNS.prototype = {
     }
   },
 
+  /**
+   * Displays a dialog with an optional message and waits until the
+   * user dismisses the dialog.
+   *
+   * @function alert
+   * @param {string} message - A string to display in the alert dialog
+   *
+   * @example
+   * System.alert("Hello World");
+   */
+  alert : function(message) {
+    if (
+      typeof message === "undefined" ||
+      message === null ||
+      String(message).trim() === ""
+    ) {
+      javax.swing.JOptionPane.showMessageDialog(
+        null,
+        null,
+        "Alert",
+        javax.swing.JOptionPane.WARNING_MESSAGE
+      );
+    } else {
+      javax.swing.JOptionPane.showMessageDialog(
+        null,
+        String(message),
+        "Alert",
+        javax.swing.JOptionPane.WARNING_MESSAGE
+      );
+    }
+  },
+  
   /**
    * Appends a path fragment to another.
    *
@@ -651,7 +683,9 @@ _SystemNS.prototype = {
       typeof date === "undefined" ||
       date === null
     ) {
-      throw new Error("date argument must be Date and can not be undefined or null");
+      throw new Error(
+        "date argument must be Date and can not be undefined or null"
+      );
     }
     try {
       var format = java.text.DateFormat.getDateTimeInstance();
@@ -930,7 +964,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Parses the given date as string to creates a date.
+   * Parses the given date as string to creates a date.<br>
    * Hint: The date to be parsed must have the same format as the
    * format pattern.
    *
@@ -1093,7 +1127,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Returns the plugin name of any scripting object.
+   * Returns the plugin name of any scripting object.<br>
    * Hint: The argument getPluginName is an additional flag, to mock a result.
    *
    * @function getObjectPluginName
@@ -1166,7 +1200,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Returns the implementation version of the Rhino engine.
+   * Returns the implementation version of the Rhino engine.<br>
    * Hint: This method is not available in the standard.
    *
    * @function getRhinoVersion
@@ -1324,7 +1358,8 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isLinux : function() {
-    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("linux");
+    return String(java.lang.System.getProperty("os.name"))
+      .toLowerCase().includes("linux");
   },
 
   /**
@@ -1335,11 +1370,12 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isMac : function() {
-    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("mac");
+    return String(java.lang.System.getProperty("os.name"))
+      .toLowerCase().includes("mac");
   },
   
   /**
-   * Returns true if object is not found.
+   * Returns true if object is not found.<br>
    * Hint: The argument shallNotBeFound is an additional flag, to mock a result.
    *
    * @function isNotFound
@@ -1370,7 +1406,8 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isWindows : function() {
-    return String(java.lang.System.getProperty("os.name")).toLowerCase().includes("windows");
+    return String(java.lang.System.getProperty("os.name"))
+      .toLowerCase().includes("windows");
   },
   
   /**
@@ -1639,7 +1676,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Waits for keypress enter.
+   * Waits for keypress enter.<br>
    * Hint: This method is not available in the standard.
    *
    * @function waitEnter
@@ -1746,7 +1783,9 @@ _SystemNS.prototype = {
       typeof waitDate === "undefined" ||
       waitDate === null
     ) {
-      throw new Error("waitDate argument must be Date and can not be undefined or null");
+      throw new Error(
+        "waitDate argument must be Date and can not be undefined or null"
+      );
     }
     var wait = 500;
     if (typeof checkPeriod !== "undefined" && checkPeriod !== null) {
