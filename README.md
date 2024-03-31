@@ -20,8 +20,11 @@ Four runtime environments are offered in VMware Aria Automation:
 
 The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMware Aria Automation runtime environments. It is programmed in Java and generates a class from the compiled JavaScript code. It was bundled with Java SE 6 and used as a programming interface in some business products, like VMware Aria Automation. Rhino can be used with Java 8 and above and is mostly compatible with the ECMAScript 5 standard.
 
-* [Energy Consumption Measurement of Algorithms with Rhino](https://github.com/mozilla/rhino/discussions/1455)
 * [Rhino Engine as Part of other Products](https://github.com/mozilla/rhino/discussions/1425)
+
+### Miscellaneous Information
+
+* [Energy Consumption Measurement of Algorithms with Rhino](https://github.com/mozilla/rhino/discussions/1455)
 
 ## Emulation
 
