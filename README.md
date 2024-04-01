@@ -24,6 +24,7 @@ The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMwar
 
 ### Miscellaneous Information
 
+* [Attempt to Build Findings for Sustainability Considerations](https://github.com/orgs/Green-Software-Foundation/discussions/142)
 * [Energy Consumption Measurement of Algorithms with Rhino](https://github.com/mozilla/rhino/discussions/1455)
 
 ## Emulation
