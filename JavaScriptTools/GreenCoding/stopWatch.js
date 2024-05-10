@@ -5,7 +5,7 @@
  * @license MIT
  * @version 0.1.0
  *
- * Checked with Rhino engines version 1.7R4 and 1.7.14
+ * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
  */
 
 var stopWatch = function() {
