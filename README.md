@@ -16,6 +16,10 @@ Four runtime environments are offered in VMware Aria Automation:
 * PowerShell with PowerCLI and
 * Python.
 
+### Miscellaneous Information
+
+* [JSON schema validator in VMware Aria Automation](https://github.com/mozilla/rhino/discussions/1466)
+
 ## Rhino
 
 The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VMware Aria Automation runtime environments. It is programmed in Java and generates a class from the compiled JavaScript code. It was bundled with Java SE 6 and used as a programming interface in some business products, like VMware Aria Automation. Rhino can be used with Java 8 and above and is mostly compatible with the ECMAScript 5 standard.
