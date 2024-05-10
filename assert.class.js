@@ -10,12 +10,15 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.6.0
+ * @version 0.7.0
  *
- * Checked with Aria Automation 8.5.1 and 8.12.2.
- * Checked standalone with Windows 10 and RHEL 9.2, with the Rhino
- * engines 1.7R4 and 1.7.14, with Bellsoft JDK 11.0.20 and Oracle
- * OpenJDK 20.0.2.
+ * Checked with ...
+ * - Aria Automation 8.5.1, 8.12.2, 8.14.0 and 8.16.2.
+ * Checked standalone with ...
+ * - Windows 10, Windows 11 and RHEL 9.2.
+ * - Rhino 1.7R4, 1.7.14 and 1.7.15.
+ * - Bellsoft JDK 11.0.23, Bellsoft JDK 17.0.11, Oracle OpenJDK 20.0.2,
+ *   Bellsoft JDK 21.0.1 and Bellsoft JDK 22.0.1.
  */
 
 var _assertNS = {
@@ -119,7 +122,7 @@ var _assertNS = {
   },
 
   /**
-   * Determines whether the passed value is a instance of the given
+   * Determines whether the passed value is an instance of the given
    * constructor.
    *
    * @function isInstanceOf
@@ -392,7 +395,7 @@ var _assertNS = {
    * Wrapper for notMatch method.
    *
    * @function doesNotMatch
-   * @param {string || number} actual - The actual value
+   * @param {(string|number)} actual - The actual value
    * @param {RegExp} expected - The expected value
    * @param {string} message - If provided, this error message is set
    */
@@ -577,10 +580,10 @@ var _assertNS = {
   },
 
   /**
-   * Expects the that actual match the regular expression.
+   * Expects that actual match the regular expression.
    *
    * @function match
-   * @param {string || number} actual - The actual value
+   * @param {(string|number)} actual - The actual value
    * @param {RegExp} expected - The expected value
    * @param {string} message - If provided, this error message is set
    *
@@ -671,10 +674,10 @@ var _assertNS = {
   },
 
   /**
-   * Expects the that actual not match the regular expression.
+   * Expects that actual not match the regular expression.
    *
    * @function notMatch
-   * @param {string || number} actual - The actual value
+   * @param {(string|number)} actual - The actual value
    * @param {RegExp} expected - The expected value
    * @param {string} message - If provided, this error message is set
    *
@@ -834,6 +837,10 @@ var _assertNS = {
    * // TypeError(Wrong value)
    * var err = new TypeError("Wrong value");
    * assert.throws( function () { throw err; }, "Wrong value" );
+   * 
+   * Hint: An Action is not a function!
+   * It is not possible to set an action as fn parameter, e.g. via
+   * System.getModule("youModule").actionName().
    */
   throws : function(fn, expectedError, message) {
     if (arguments.length < 2) {
@@ -889,13 +896,13 @@ var _assertNS = {
       throw new Error("Arguments missing at describe");
     }
     if (this.isFunction(fn)) {
-      System.log("> " + String(name));
+      System.log("{ " + String(name));
       try {
         fn();
       } catch (exception) {
         System.error(exception);
       }
-      System.log("< " + String(name));
+      System.log("} //" + String(name));
     }
   },
 
@@ -925,7 +932,7 @@ var _assertNS = {
       throw new Error("Arguments missing at describeEach");
     }
     if (this.isArray(table) && this.isFunction(fn)) {
-      System.log("> " + String(name));
+      System.log("{ " + String(name));
       try {
         table.forEach( function(row) {
           fn.apply(null, row);
@@ -933,7 +940,7 @@ var _assertNS = {
       } catch (exception) {
         System.error(exception);
       }
-      System.log("< " + String(name));
+      System.log("} //" + String(name));
     }
   },
 
@@ -1032,7 +1039,7 @@ var _assertNS = {
       throw new Error("Arguments missing at testEach");
     }
     if (this.isArray(table) && this.isFunction(fn)) {
-      System.log("> " + String(name));
+      System.log("{ " + String(name));
       try {
         table.forEach( function(row) {
           fn.apply(null, row);
@@ -1040,7 +1047,7 @@ var _assertNS = {
       } catch (exception) {
         System.error(exception);
       }
-      System.log("< " + String(name));
+      System.log("} //" + String(name));
     }
   },
 
@@ -1103,6 +1110,22 @@ var _assertNS = {
     System.log("Todo: " + String(todo));
   },
 
+  /**
+   * Returns the class name.<br>
+   * Hint: This method is a standard.
+   *
+   * @function getClassName
+   * @returns {string}
+   *
+   * @example
+   * var assert = assert();
+   * var result = assert.getClassName();
+   * System.log(result);
+   */
+  getClassName : function() {
+    return "Assert";
+  },
+  
   // Private utility methods
 
   /**
