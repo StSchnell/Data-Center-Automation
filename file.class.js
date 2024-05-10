@@ -9,7 +9,7 @@
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4 and 1.7.14
+ * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
  */
 
 /**
@@ -22,7 +22,9 @@ var File = function(file) {
     var f = java.io.File(file);
     this.directory = String(f.getParent());
     this.exists = f.exists();
-    this.extension = f.getName().substring(f.getName().lastIndexOf('.') + 1).toLowerCase();
+    this.extension = f.getName().substring(
+      f.getName().lastIndexOf(".") + 1
+    ).toLowerCase();
     this.hostname = "localhost";
     this.isDir = f.isDirectory();
     this.isLocal = false;
@@ -62,9 +64,9 @@ File.prototype = {
    *
    * @param targetName {string} - The target file.
    */
-  copyTo : function(target) {
-    if (typeof target === "undefined" || target === null) {
-      throw new Error("target argument can not be undefined or null");
+  copyTo : function(targetName) {
+    if (typeof targetName === "undefined" || targetName === null) {
+      throw new Error("targetName argument can not be undefined or null");
     }
     java.nio.file.Files.copy(
       java.io.File(this.path).toPath(),
@@ -93,7 +95,7 @@ File.prototype = {
   createFile : function() {
     var file = java.io.File(this.path);
     if (!file.exists()) {
-      if (file.createNewFile()) {;
+      if (file.createNewFile()) {
         this.exists = file.exists();
         this.length = file.length();
       }
