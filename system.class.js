@@ -12,12 +12,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.0
+ * @version 0.3.2
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4 and 1.7.14
+ * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
  */
 
 /**
@@ -1156,7 +1156,7 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Returns the type for the given object.
+   * Returns the type for the given object.<br>
    * Hint: The argument getType is an additional flag, to mock a result.
    *
    * @function getObjectType
@@ -1309,6 +1309,25 @@ _SystemNS.prototype = {
   },
 
   /**
+   * Displays a question-message dialog requesting input from the user.
+   *
+   * @function
+   * @param {string} message - Text to display.
+   * @returns {string}
+   *
+   * @example
+   * // Displays the entered name
+   * System.log(System.input("Insert your name"));
+   */
+  input : function(message) {
+    if (typeof message !== "undefined" && message !== null) {
+      return javax.swing.JOptionPane.showInputDialog(message);
+    } else {
+      return javax.swing.JOptionPane.showInputDialog("Input");
+    }
+  },
+  
+  /**
    * Tests whether host is reachable.
    *
    * @function isHostReachable
@@ -1358,8 +1377,11 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isLinux : function() {
-    return String(java.lang.System.getProperty("os.name"))
-      .toLowerCase().includes("linux");
+    if (String(java.lang.System.getProperty("os.name")).toLowerCase().indexOf("linux") !== -1) {
+      return true;
+    } else {
+      return false;
+    }
   },
 
   /**
@@ -1370,8 +1392,11 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isMac : function() {
-    return String(java.lang.System.getProperty("os.name"))
-      .toLowerCase().includes("mac");
+    if (String(java.lang.System.getProperty("os.name")).toLowerCase().indexOf("mac") !== -1) {
+      return true;
+    } else {
+      return false;
+    }
   },
   
   /**
@@ -1406,8 +1431,11 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isWindows : function() {
-    return String(java.lang.System.getProperty("os.name"))
-      .toLowerCase().includes("windows");
+    if (String(java.lang.System.getProperty("os.name")).toLowerCase().indexOf("windows") !== -1) {
+      return true;
+    } else {
+      return false;
+    }
   },
   
   /**
