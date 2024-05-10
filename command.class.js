@@ -12,9 +12,11 @@
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Windows 10 and RHEL 9.2, with the Rhino engines 1.7R4
- * and 1.7.14, with Bellsoft JDK 11.0.20, Oracle OpenJDK 20.0.2 and
- * Bellsoft JDK 21.0.1.
+ * Checked with ...
+ * - Windows 10, Windows 11 and RHEL 9.2.
+ * - Rhino 1.7R4, 1.7.14 and 1.7.15.
+ * - Bellsoft JDK 11.0.23, Bellsoft JDK 17.0.11, Oracle OpenJDK 20.0.2,
+ *   Bellsoft JDK 21.0.1 and Bellsoft JDK 22.0.1.
  */
 
 /**
@@ -30,8 +32,7 @@
 
 /**
  * Executes a command in the host operating system.
- * Commands are dependent on the host operating system default shell.
- *
+ * Commands are dependent on the host operating system default shell.<br>
  * Hint: Command can be created using string or array. If string value
  * is provided command arguments are extracted by splitting the string
  * using whitespace as separator.
@@ -87,9 +88,9 @@ var Command = function(command) {
     }
   }
 
-  this.input;
-  this.output;
-  this.result;
+  this.input = "";
+  this.output = "";
+  this.result = null;
 };
 
 Command.prototype = {
