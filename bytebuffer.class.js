@@ -10,7 +10,7 @@
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4 and 1.7.14
+ * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
  */
 
 var ByteBuffer = function(arg) {
@@ -20,10 +20,12 @@ var ByteBuffer = function(arg) {
    * from a byte buffer.
    */
 
+  var context;
+  
   try {
 
     var contextFactory = org.mozilla.javascript.ContextFactory();
-    var context = contextFactory.getGlobal().enterContext();
+    context = contextFactory.getGlobal().enterContext();
 
     if (typeof arg === "undefined" || arg === null) {
 
