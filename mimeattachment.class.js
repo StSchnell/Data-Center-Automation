@@ -4,12 +4,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.0
+ * @version 0.2.1
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4 and 1.7.14
+ * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
  */
 
 var MimeAttachment = function(file) {
@@ -58,11 +58,14 @@ MimeAttachment.prototype = {
    *
    * @function write
    * @param {string} directory - Directory where to store the file.
-   * @param {string} filename - Optional filename (if null, use the mime attachment name).
+   * @param {string} filename - Optional filename<br>
+   *   (if null, use the mime attachment name)
    * @returns {File}
    */
   write : function(directory, filename) {
 
+    var context;
+    
     try {
 
       if (
@@ -84,13 +87,19 @@ MimeAttachment.prototype = {
       var fullPath = System.appendToPath(String(directory), String(filename));
 
       var contextFactory = org.mozilla.javascript.ContextFactory();
-      var context = contextFactory.getGlobal().enterContext();
+      context = contextFactory.getGlobal().enterContext();
 
       var path = java.nio.file.Paths.get(fullPath);
       java.nio.file.Files.deleteIfExists(path);
       java.nio.file.Files.createFile(path);
       var outputStream = java.nio.file.Files.newOutputStream(path);
-      if (this.buffer.getClassName() === "ByteBuffer") {
+      var className = "";
+      try {
+        className = this.buffer.getClassName();
+      } catch (exception) {
+        className = this.buffer.getClass().getName();
+      }
+      if ( className === "ByteBuffer" || className === "[B") {
         outputStream.write(this.buffer._byteBuffer);
       } else {
         outputStream.write(this.buffer);
@@ -98,7 +107,7 @@ MimeAttachment.prototype = {
       outputStream.close();
 
     } catch (exception) {
-      System.log(exception)
+      System.log(exception);
     } finally {
       context.exit();
     }
