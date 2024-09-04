@@ -6,11 +6,11 @@ This repository looks at some developer perspectives on data center automation w
 
 <p align="center"><img src="images/newspaperSeller.png"></p>
 
-## VMware Aria Automation
+## VMware Cloud Foundation (VCF) Automation
 
-VMware Aria is a data center management platform that offers consistent handling of applications, infrastructures and services across different kind of clouds with a single common data model. A part of it is [VMware Aria Automation](https://www.vmware.com/products/aria-automation.html), a workflow automation platform with which complex data center infrastructure tasks can be automated or extended.
+VCF contains is a data center management platform that offers consistent handling of applications, infrastructures and services across different kind of clouds with a single common data model. A part of it is [VCF Automation](https://www.vmware.com/products/cloud-infrastructure/cloud-foundation-automation), a workflow automation platform with which complex data center infrastructure tasks can be automated or extended.
 
-Four runtime environments are offered in VMware Aria Automation:
+Four runtime environments are offered in VCF Automation:
 * JavaScript with [Rhino engine](https://github.com/mozilla/rhino/),
 * [Node.js](https://nodejs.org),
 * PowerShell with PowerCLI and
