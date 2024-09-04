@@ -1,6 +1,8 @@
 // Begin ---------------------------------------------------------------
 
 /**
+ * @function getActionAsText
+ *
  * @param {string} in_moduleName - Module name which contains the action
  * @param {string} in_actionName - Action name which contains the text
  * @returns {string} actionAsText
@@ -17,7 +19,7 @@
  * var in_moduleName = "com.vmware.library.powershell.converter";
  * var in_actionName = "getConverter";
  *
- * Checked with Aria Automation 8.12.0 and 8.13.1
+ * Checked with Aria Automation 8.12.0, 8.13.1, 8.14.0, 8.16.0 and 8.18.0
  */
 
 var _getActionAsText = {
