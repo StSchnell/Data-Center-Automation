@@ -18,7 +18,7 @@ Four runtime environments are offered in VCF Automation:
 
 ### Miscellaneous Information
 
-* [JSON schema validator in VMware Aria Automation](https://github.com/mozilla/rhino/discussions/1466)
+* [JSON schema validator in VCF Automation](https://github.com/mozilla/rhino/discussions/1466)
 
 ## Rhino
 
