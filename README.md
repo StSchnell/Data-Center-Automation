@@ -33,37 +33,43 @@ The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VCF A
 
 ## Emulation
 
-Emulations imitate the behavior of functions. VCF Automation offers, with the JavaScript runtime environment, a lot of classes, whose methods can be mocked-up on this way. This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment. The mock-up classes here bases on the same JavaScript engine used in Aria Automation, the Mozilla Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
+Emulations imitate the behavior of functions. VCF Automation offers, with the JavaScript runtime environment, a lot of classes, whose methods can be mocked-up on this way. This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment. The mock-up classes here bases on the same JavaScript engine used in VCF Automation, the Mozilla Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
 
 ### System Class
 
-VCF Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements. To use these methods outside of Aria Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
+VCF Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements. To use these methods outside of VCF Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
 
 To use this library in your code it is necessary to add `load("system.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ### Command Class
 
-VCF Automation offers a command class, to execute commands of the host operating system. To use these methods outside of Aria Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
+VCF Automation offers a command class, to execute commands of the host operating system. To use these methods outside of VCF Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
 
 To use this library in your code it is necessary to add `load("command.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ### File Classes
 
-VCF Automation offers a file, file reader and file writer class, to operate with and handle the access to text files. To use these methods outside of Aria Automation, a [library is available here to emulate the file classes](https://github.com/StSchnell/Data-Center-Automation/blob/main/file.class.js).
+VCF Automation offers a file, file reader and file writer class, to operate with and handle the access to text files. To use these methods outside of VCF Automation, a [library is available here to emulate the file classes](https://github.com/StSchnell/Data-Center-Automation/blob/main/file.class.js).
 
 To use this library in your code it is necessary to add `load("file.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ### ByteBuffer Class
 
-VCF Automation offers a byte buffer class, this is a wrapper around a byte array and used for passing references to binary content. To use these methods outside of Aria Automation, a [library is available here to emulate the byte buffer class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
+VCF Automation offers a byte buffer class, this is a wrapper around a byte array and used for passing references to binary content. To use these methods outside of VCF Automation, a [library is available here to emulate the byte buffer class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
 
 To use this library in your code it is necessary to add `load("bytebuffer.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ### MimeAttachment Class
 
-VCF Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of Aria Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/mimeattachment.class.js).
+VCF Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of VCF Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/mimeattachment.class.js).
 
 To use this library in your code it is necessary to add `load("mimeattachment.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
+
+### URL Class
+
+VCF Automation offers an url class, to call HTTP requests. To use these methods outside of VCF Automation, a [library is available here to emulate the url class](https://github.com/StSchnell/Data-Center-Automation/blob/main/url.class.js).
+
+To use this library in your code it is necessary to add `load("url.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
 ## Libraries
 
