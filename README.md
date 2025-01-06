@@ -31,6 +31,10 @@ The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VCF A
 * [Attempt to Build Findings for Sustainability Considerations](https://github.com/orgs/Green-Software-Foundation/discussions/142)
 * [Energy Consumption Measurement of Algorithms with Rhino](https://github.com/mozilla/rhino/discussions/1455)
 
+### Changes and Additions
+
+* [At startup of the Rhino debugger window position is at the center of the screen and window size was increased.](https://github.com/StSchnell/Data-Center-Automation/blob/main/org/mozilla/javascript/tools/debugger/Main.java)
+
 ## Emulation
 
 Emulations imitate the behavior of functions. VCF Automation offers, with the JavaScript runtime environment, a lot of classes, whose methods can be mocked-up on this way. This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment. The mock-up classes here bases on the same JavaScript engine used in VCF Automation, the Mozilla Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
