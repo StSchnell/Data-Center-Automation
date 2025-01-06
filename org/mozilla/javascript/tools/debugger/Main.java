@@ -7,6 +7,9 @@
 /*
  * Copy of https://github.com/mozilla/rhino/blob/master/rhino-tools/src/main/java/org/mozilla/javascript/tools/debugger/Main.java
  * with greater window size and window centered on the screen.
+ *
+ * Copy from 2025-01-06
+ * Rhino release 1.8.0 and 1.8.1-SNAPSHOT
  */
 
 package org.mozilla.javascript.tools.debugger;
