@@ -12,13 +12,15 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.2
+ * @version 0.3.3
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
+ * Checked with Rhino engines version 1.7R4, 1.7.14, 1.7.15 and 1.8.0
  */
+
+org.fusesource.jansi.AnsiConsole.systemInstall();
 
 /**
  * URL class,
@@ -70,6 +72,30 @@ function WorkflowItemInfo(name, displayName) {
   this.getName = function() {
     return this._name;
   };
+}
+
+/**
+ * WorkflowToken class, representing a running or finished workflow.
+ * Mock-up of VMware Aria automation WorkflowToken class, only
+ * attributes.
+ */
+function WorkflowToken() {
+  this.attributesStack = [];
+  this.businessState = "";
+  this.currentWorkflow = {};
+  this.endDate = new Date().toString();
+  this.endDateAsDate = new Date();
+  this.exception = "";
+  this.id = System.nextUUID();
+  this.isStillValid = true;
+  this.logEvents = {};
+  this.name = "Mock-up of WorkflowToken class";
+  this.rootWorkflow = {};
+  this.runningUserName = "";
+  this.startDate = new Date().toString();
+  this.startDateAsDate = new Date();
+  this.state = "";
+  this.workflowInputId = "";
 }
 
 // System class
@@ -145,7 +171,7 @@ _SystemNS.prototype = {
       );
     }
   },
-  
+
   /**
    * Appends a path fragment to another.
    *
@@ -370,7 +396,11 @@ _SystemNS.prototype = {
    * System.debug("This is a test");
    */
   debug : function(text) {
-    this._println("\u001B[32mDEBUG\u001B[0m", text);
+    // this._println("\u001B[32mDEBUG\u001B[0m", text);
+    this._println(
+      org.fusesource.jansi.Ansi.ansi().fgGreen().a("DEBUG").reset(),
+      text
+    );
   },
 
   /**
@@ -407,7 +437,11 @@ _SystemNS.prototype = {
    * System.error("This is a test");
    */
   error : function(text) {
-    this._println("\u001B[31mERROR\u001B[0m", text);
+    // this._println("\u001B[31mERROR\u001B[0m", text);
+    this._println(
+      org.fusesource.jansi.Ansi.ansi().fgRed().a("ERROR").reset(),
+      text
+    );
   },
 
   /**
@@ -1289,6 +1323,198 @@ _SystemNS.prototype = {
   },
 
   /**
+   * Returns the current timestamp.
+   *
+   * @function getTimestamp
+   * @returns {string}
+   *
+   * @example
+   * // Delivers 20250108_050200
+   * var result = System.getTimestamp();
+   * System.log(result);
+   */
+  getTimestamp : function() {
+    const date = new Date();
+    var year = date.getFullYear().toString();
+    var month;
+    if ((date.getMonth() + 1) < 10) {
+      month = "0" + (date.getMonth() + 1).toString();
+    } else {
+      month = (date.getMonth() + 1).toString();
+    }
+    var day;
+    if ((date.getDate()) < 10) {
+      day = "0" + date.getDate().toString();
+    } else {
+      day = date.getDate().toString();
+    }
+    var hours;
+    if ((date.getHours()) < 10) {
+      hours = "0" + date.getHours().toString();
+    } else {
+      hours = date.getHours().toString();
+    }
+    var minutes;
+    if ((date.getMinutes()) < 10) {
+      minutes = "0" + date.getMinutes().toString();
+    } else {
+      minutes = date.getMinutes().toString();
+    }
+    var seconds;
+    if ((date.getSeconds()) < 10) {
+      seconds = "0" + date.getSeconds().toString();
+    } else {
+      seconds = date.getSeconds().toString();
+    }
+    return year + month + day + "_" + hours + minutes + seconds;
+  },
+
+  /**
+   * @function getWorkflowTokenURL
+   * @param {string} type
+   * @param {object} workflowToken
+   * @param {boolean} secure, default false
+   * @returns {object.<URL>}
+   *
+   * @example
+   * var workflowToken = new WorkflowToken();
+   * // Possible types are:
+   * //   workflowAutoLogonExecute
+   * //   workflowAutoLogonSchedule
+   * //   workflowTokenAutoLogonAnswer
+   * var url = System.getWorkflowTokenURL(
+   *   "workflowTokenAutoLogonAnswer",
+   *   workflowToken
+   * );
+   */
+  getWorkflowTokenURL : function(type, workflowToken, secure) {
+    if (
+      typeof type === "undefined" ||
+      type === null ||
+      String(type).trim() === ""
+    ) {
+      throw new Error("type argument can not be undefined or null");
+    }
+    if (
+      typeof workflowToken === "undefined" ||
+      workflowToken === null
+    ) {
+      throw new Error("workflowToken argument can not be undefined or null");
+    }
+    var url = new URL(); // Mock-up URL object
+
+    return url;
+  },
+
+  /**
+   * @function getWorkflowTokenURLForServer
+   * @param {string} type
+   * @param {object} workflowToken
+   * @param {string} host
+   * @param {string} port
+   * @param {boolean} secure
+   * @returns {object.<URL>}
+   */
+  getWorkflowTokenURLForServer : function(type, workflowToken, host,
+    port, secure) {
+    if (
+      typeof type === "undefined" ||
+      type === null ||
+      String(type).trim() === ""
+    ) {
+      throw new Error("type argument can not be undefined or null");
+    }
+    if (
+      typeof workflowToken === "undefined" ||
+      workflowToken === null
+    ) {
+      throw new Error("workflowToken argument can not be undefined or null");
+    }
+    if (
+      typeof host === "undefined" ||
+      host === null ||
+      String(host).trim() === ""
+    ) {
+      throw new Error("host argument can not be undefined or null");
+    }
+    if (
+      typeof port === "undefined" ||
+      port === null ||
+      String(port).trim() === ""
+    ) {
+      throw new Error("port argument can not be undefined or null");
+    }
+    var url = new URL(); // Mock-up URL object
+    url.host = host.toString();
+    url.port = port.toString();
+
+    return url;
+  },
+
+  /**
+   * @function getWorkflowURL
+   * @param {string} type
+   * @param {object} workflow
+   * @param {boolean} secure, default false
+   * @returns {object.<URL>}
+   */
+  getWorkflowURL : function(type, workflow, secure) {
+    if (
+      typeof type === "undefined" ||
+      type === null ||
+      String(type).trim() === ""
+    ) {
+      throw new Error("type argument can not be undefined or null");
+    }
+    if (typeof workflow === "undefined" || workflow === null) {
+      throw new Error("workflow argument can not be undefined or null");
+    }
+
+    return new URL(); // Mock-up URL object
+  },
+
+  /**
+   * @function getWorkflowURLForServer
+   * @param {string} type
+   * @param {object} workflow
+   * @param {string} host
+   * @param {string} port
+   * @param {boolean} secure
+   * @returns {object.<URL>}
+   */
+  getWorkflowURLForServer : function(type, workflow, host, port, secure) {
+    if (
+      typeof type === "undefined" ||
+      type === null ||
+      String(type).trim() === ""
+    ) {
+      throw new Error("type argument can not be undefined or null");
+    }
+    if (typeof workflow === "undefined" || workflow === null) {
+      throw new Error("workflow argument can not be undefined or null");
+    }
+    if (
+      typeof host === "undefined" ||
+      host === null ||
+      String(host).trim() === ""
+    ) {
+      throw new Error("host argument can not be undefined or null");
+    }
+    if (
+      typeof port === "undefined" ||
+      port === null ||
+      String(port).trim() === ""
+    ) {
+      throw new Error("port argument can not be undefined or null");
+    }
+    var url = new URL(); // Mock-up URL object
+    url.host = host.toString();
+    url.port = port.toString();
+
+    return url;
+  },
+
+  /**
    * Converts hexadecimal string to decimal number.
    *
    * @function hexToDecimal
@@ -1326,7 +1552,7 @@ _SystemNS.prototype = {
       return javax.swing.JOptionPane.showInputDialog("Input");
     }
   },
-  
+
   /**
    * Tests whether host is reachable.
    *
@@ -1398,7 +1624,7 @@ _SystemNS.prototype = {
       return false;
     }
   },
-  
+
   /**
    * Returns true if object is not found.<br>
    * Hint: The argument shallNotBeFound is an additional flag, to mock a result.
@@ -1437,7 +1663,7 @@ _SystemNS.prototype = {
       return false;
     }
   },
-  
+
   /**
    * Logs a text in the system with INFO.
    *
@@ -1448,7 +1674,11 @@ _SystemNS.prototype = {
    * System.log("This is a test");
    */
   log : function(text) {
-    this._println("\u001B[36mINFO\u001B[0m", text);
+    // this._println("\u001B[36mINFO\u001B[0m", text);
+    this._println(
+      org.fusesource.jansi.Ansi.ansi().fgCyan().a("INFO").reset(),
+      text
+    );
   },
 
   /**
@@ -1843,7 +2073,11 @@ _SystemNS.prototype = {
    * System.warn("This is a test");
    */
   warn : function(text) {
-    this._println("\u001B[33mWARNING\u001B[0m", text);
+    // this._println("\u001B[33mWARNING\u001B[0m", text);
+    this._println(
+      org.fusesource.jansi.Ansi.ansi().fgYellow().a("WARNING").reset(),
+      text
+    );
   }
 
 };
