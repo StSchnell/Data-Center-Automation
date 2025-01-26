@@ -75,6 +75,12 @@ VCF Automation offers an url class, to call HTTP requests. To use these methods 
 
 To use this library in your code it is necessary to add `load("url.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
+### Zip Class
+
+VCF Automation offers a ZipWriter class, which contains a set of functions to handle string data in the context of compressed zip files. To use these methods outside of VCF Automation, a [library is available here to emulate the ZipWriter class](https://github.com/StSchnell/Data-Center-Automation/blob/main/zip.class.js). A ZipReader class is also available, to read the contents of the generated zip files.
+
+To use this library in your code it is necessary to add `load("zip.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
+
 ## Libraries
 
 It is possible to use [JavaScript libraries](JavaScriptLibraries.md). By using libraries we create the possibility to extend the range of functions in a simple way.
