@@ -13,12 +13,13 @@
  * @version 0.7.0
  *
  * Checked with ...
- * - Aria Automation 8.5.1, 8.12.2, 8.14.0 and 8.16.2.
+ * - Aria Automation 8.5.1, 8.12.2, 8.14.0, 8.16.2 and 8.18.1.
  * Checked standalone with ...
  * - Windows 10, Windows 11 and RHEL 9.2.
- * - Rhino 1.7R4, 1.7.14 and 1.7.15.
+ * - Rhino 1.7R4, 1.7.14, 1.7.15 and 1.8.0.
  * - Bellsoft JDK 11.0.23, Bellsoft JDK 17.0.11, Oracle OpenJDK 20.0.2,
- *   Bellsoft JDK 21.0.1 and Bellsoft JDK 22.0.1.
+ *   Bellsoft JDK 21.0.1, Bellsoft JDK 22.0.1, Bellsoft JDK 23.0.1 and
+ *   Bellsoft JDK 24.
  */
 
 var _assertNS = {
