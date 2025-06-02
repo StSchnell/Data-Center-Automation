@@ -4,12 +4,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.1.0
+ * @version 0.1.2
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
+ * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.0 and 1.8.1
  */
 
 /**
@@ -111,7 +111,23 @@ File.prototype = {
       if (file.delete()) {
         this.exists = file.exists();
         this.length = -1;
+      } else {
+        System.warn("File was not deleted");
       }
+    }
+  },
+
+  /**
+   * Checks if file exists.
+   *
+   * @returns {boolean}
+   */
+  existsFile: function() {
+    var file = java.io.File(this.path);
+    if (file.exists()) {
+      return true;
+    } else {
+      return false;
     }
   },
 
@@ -339,6 +355,83 @@ FileWriter.prototype = {
       default :
         this._fileWriter.write(String(value) + this._lineEndUnix);
     }
+  }
+
+/**
+ * Creates a new FileHelper.
+ */
+var FileHelper = function() {
+};
+
+FileHelper.prototype = {
+
+  /**
+   * Returns the class name.<br>
+   * Hint: This method is a standard.
+   *
+   * @returns {string}
+   */
+  getClassName : function() {
+    return "FileHelper";
+  },
+
+  /**
+   * Extracts the directory part from the file path.
+   *
+   * @param {string} path - Path from which something is to be extracted.
+   * @returns {string}
+   */
+  getDirectory : function(path) {
+    return System.extractDirectory(path);
+  },
+
+  /**
+   * Extracts the extension part from the file path.
+   *
+   * @param {string} path - Path from which something is to be extracted.
+   * @returns {string}
+   */
+  getExtension : function(path) {
+    return System.extractFileNameExtension(path);
+  },
+
+  /**
+   * Extracts the file name part from the file path.
+   *
+   * @param {string} path - Path from which something is to be extracted.
+   * @returns {string}
+   */
+  getName : function(path) {
+    return System.extractFileName(path);
+  },
+
+  /**
+   * Extracts the file name part without extension from the file path.
+   *
+   * @param {string} path - Path from which something is to be extracted.
+   * @returns {string}
+   */
+  getNameWithoutExtension : function(path) {
+    return System.extractFileNameWithoutExtension(path);
+  },
+
+  /**
+   * Checks is path is absolute.
+   *
+   * @param {string} path - Path to be checked if it is absolute.
+   * @returns {boolean}
+   */
+  isAbsolutePath : function(path) {
+    if (typeof path !== "undefined" && path !== null && path.trim().length > 0) {
+      var separatorPath = java.util.regex.Pattern.compile("\\\\").matcher(path).replaceAll("/");
+      if (separatorPath.indexOf(":/") == 1) {
+        return true;
+      }
+      if (separatorPath.charAt(0) == '/') {
+        return true;
+      }
+    } 
+    return false;
   }
 
 };
