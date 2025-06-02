@@ -357,6 +357,8 @@ FileWriter.prototype = {
     }
   }
 
+};
+    
 /**
  * Creates a new FileHelper.
  */
