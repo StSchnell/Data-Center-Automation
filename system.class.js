@@ -12,12 +12,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.3
+ * @version 0.3.4
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.14, 1.7.15 and 1.8.0
+ * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.0 and 1.8.1
  */
 
 /**
@@ -100,7 +100,7 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = String(text).trimRight();
       } else {
-        outText = String(text).replace(/[\s]+$/g, "");
+        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
       }
     }
     if (_logMarker) {
@@ -478,7 +478,7 @@ _SystemNS.prototype = {
     ) {
       throw new Error("fullPath argument can not be undefined or null");
     }
-    var separatorFullPath = fullPath.toString().replace(/\\/g, "/");
+    var separatorFullPath = java.util.regex.Pattern.compile("\\\\").matcher(fullPath.toString()).replaceAll("/");
     return separatorFullPath.substring(
       0,
       separatorFullPath.lastIndexOf("/") + 1
@@ -505,7 +505,7 @@ _SystemNS.prototype = {
     ) {
       throw new Error("fullPath argument can not be undefined or null");
     }
-    var separatorFullPath = fullPath.toString().replace(/\\/g, "/");
+    var separatorFullPath = java.util.regex.Pattern.compile("\\\\").matcher(fullPath.toString()).replaceAll("/");
     return separatorFullPath.substring(
       separatorFullPath.lastIndexOf("/") + 1
     );
@@ -1689,7 +1689,7 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = text.toString().trimRight();
       } else {
-        outText = text.toString().replace(/[\s]+$/g, "");
+        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
       }
     }
     java.lang.System.err.println(outText);
@@ -1714,7 +1714,7 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = text.toString().trimRight();
       } else {
-        outText = text.toString().replace(/[\s]+$/g, "");
+        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
       }
     }
     java.lang.System.out.println(outText);
