@@ -4,7 +4,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.1.2
+ * @version 0.1.3
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
