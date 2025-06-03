@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.4
+ * @version 0.3.5
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -100,7 +100,9 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = String(text).trimRight();
       } else {
-        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
+        outText = String(
+          java.util.regex.Pattern.compile("[\s]+$").matcher(String(text)).replaceAll("")
+        );
       }
     }
     if (_logMarker) {
@@ -478,7 +480,9 @@ _SystemNS.prototype = {
     ) {
       throw new Error("fullPath argument can not be undefined or null");
     }
-    var separatorFullPath = java.util.regex.Pattern.compile("\\\\").matcher(fullPath.toString()).replaceAll("/");
+    var separatorFullPath = String(
+      java.util.regex.Pattern.compile("\\\\").matcher(String(fullPath)).replaceAll("/")
+    );
     return separatorFullPath.substring(
       0,
       separatorFullPath.lastIndexOf("/") + 1
@@ -505,7 +509,9 @@ _SystemNS.prototype = {
     ) {
       throw new Error("fullPath argument can not be undefined or null");
     }
-    var separatorFullPath = java.util.regex.Pattern.compile("\\\\").matcher(fullPath.toString()).replaceAll("/");
+    var separatorFullPath = String(
+      java.util.regex.Pattern.compile("\\\\").matcher(String(fullPath)).replaceAll("/")
+    );
     return separatorFullPath.substring(
       separatorFullPath.lastIndexOf("/") + 1
     );
@@ -1689,7 +1695,9 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = text.toString().trimRight();
       } else {
-        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
+        outText = String(
+          java.util.regex.Pattern.compile("[\s]+$").matcher(String(text)).replaceAll("")
+        );
       }
     }
     java.lang.System.err.println(outText);
@@ -1714,7 +1722,9 @@ _SystemNS.prototype = {
         // trimRight added to release 1.7.6 of Rhino
         outText = text.toString().trimRight();
       } else {
-        outText = java.util.regex.Pattern.compile("[\s]+$").matcher(text.toString()).replaceAll("");
+        outText = String(
+          java.util.regex.Pattern.compile("[\s]+$").matcher(String(text)).replaceAll("")
+        );
       }
     }
     java.lang.System.out.println(outText);
