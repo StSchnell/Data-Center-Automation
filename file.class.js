@@ -425,7 +425,9 @@ FileHelper.prototype = {
    */
   isAbsolutePath : function(path) {
     if (typeof path !== "undefined" && path !== null && path.trim().length > 0) {
-      var separatorPath = java.util.regex.Pattern.compile("\\\\").matcher(path).replaceAll("/");
+      var separatorPath = String(
+        java.util.regex.Pattern.compile("\\\\").matcher(path).replaceAll("/")
+      );
       if (separatorPath.indexOf(":/") == 1) {
         return true;
       }
