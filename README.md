@@ -20,71 +20,73 @@ Four runtime environments are offered in VCF Automation:
 
 * [JSON schema validator in VCF Automation](https://github.com/mozilla/rhino/discussions/1466)
 
-## Rhino
+## JavaScript
+
+### Rhino
 
 The [Rhino](https://github.com/mozilla/rhino) JavaScript engine is part of VCF Automation runtime environments. It is programmed in Java and generates a class from the compiled JavaScript code. It was bundled with Java SE 6 and used as a programming interface in some business products, like VCF Automation. Rhino can be used with Java 8 and above and is mostly compatible with the ECMAScript 5 standard.
 
 * [Rhino Engine as Part of other Products](https://github.com/mozilla/rhino/discussions/1425)
 
-### Miscellaneous Information
+#### Miscellaneous Information
 
 * [Attempt to Build Findings for Sustainability Considerations](https://github.com/orgs/Green-Software-Foundation/discussions/142)
 * [Energy Consumption Measurement of Algorithms with Rhino](https://github.com/mozilla/rhino/discussions/1455)
 
-### Changes and Additions
+#### Changes and Additions
 
 * [At startup of the Rhino debugger window position is at the center of the screen and window size was increased.](https://github.com/StSchnell/Data-Center-Automation/blob/main/org/mozilla/javascript/tools/debugger/Main.java)
 
-## Emulation
+### Emulation
 
 Emulations imitate the behavior of functions. VCF Automation offers, with the JavaScript runtime environment, a lot of classes, whose methods can be mocked-up on this way. This gives us the possibility to code and test Actions a bit more independently, without the direct use of an Orchestration environment. The mock-up classes here bases on the same JavaScript engine used in VCF Automation, the Mozilla Rhino engine, because some of their methods access Java classes directly. This ensures us a consistent basis for simulation and operation.
 
-### System Class
+#### System Class
 
 VCF Automation offers a system class, which contains a set of basic functions to offer standard processing methods for the most fundamental requirements. To use these methods outside of VCF Automation, a [library is available here to emulate the system class](https://github.com/StSchnell/Data-Center-Automation/blob/main/system.class.js). This **m**ock-**u**p of the **s**ystem **cl**ass called Muscle. 
 
 To use this library in your code it is necessary to add `load("system.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### Command Class
+#### Command Class
 
 VCF Automation offers a command class, to execute commands of the host operating system. To use these methods outside of VCF Automation, a [library is available here to emulate the command class](https://github.com/StSchnell/Data-Center-Automation/blob/main/command.class.js).
 
 To use this library in your code it is necessary to add `load("command.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### File Classes
+#### File Classes
 
 VCF Automation offers a file, file reader and file writer class, to operate with and handle the access to text files. To use these methods outside of VCF Automation, a [library is available here to emulate the file classes](https://github.com/StSchnell/Data-Center-Automation/blob/main/file.class.js).
 
 To use this library in your code it is necessary to add `load("file.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### ByteBuffer Class
+#### ByteBuffer Class
 
 VCF Automation offers a byte buffer class, this is a wrapper around a byte array and used for passing references to binary content. To use these methods outside of VCF Automation, a [library is available here to emulate the byte buffer class](https://github.com/StSchnell/Data-Center-Automation/blob/main/bytebuffer.class.js).
 
 To use this library in your code it is necessary to add `load("bytebuffer.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### MimeAttachment Class
+#### MimeAttachment Class
 
 VCF Automation offers a mime attachment class, to describe mime attachments. The Multipurpose Internet Mail Extensions (MIME) is a standard that extends the format of messages to support text in character sets other than ASCII. To use these methods outside of VCF Automation, a [library is available here to emulate the mime attachment class](https://github.com/StSchnell/Data-Center-Automation/blob/main/mimeattachment.class.js).
 
 To use this library in your code it is necessary to add `load("mimeattachment.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### URL Class
+#### URL Class
 
 VCF Automation offers an url class, to call HTTP requests. To use these methods outside of VCF Automation, a [library is available here to emulate the url class](https://github.com/StSchnell/Data-Center-Automation/blob/main/url.class.js).
 
 To use this library in your code it is necessary to add `load("url.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-### Zip Class
+#### Zip Class
 
 VCF Automation offers a ZipWriter class, which contains a set of functions to handle string data in the context of compressed zip files. To use these methods outside of VCF Automation, a [library is available here to emulate the ZipWriter class](https://github.com/StSchnell/Data-Center-Automation/blob/main/zip.class.js). A ZipReader class is also available, to read the contents of the generated zip files.
 
 To use this library in your code it is necessary to add `load("zip.class.js");` at the beginning of the program. After that, all functions can be used seamlessly.
 
-## Libraries
+### Libraries
 
 It is possible to use [JavaScript libraries](JavaScriptLibraries.md). By using libraries we create the possibility to extend the range of functions in a simple way.
 
-## Tools
+### Tools
 
 Also it is possible to use [JavaScript tools](JavaScriptTools.md).
