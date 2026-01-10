@@ -12,12 +12,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.5
+ * @version 0.3.8
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.0 and 1.8.1
+ * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.1 and 1.9.0
  */
 
 /**
@@ -76,6 +76,7 @@ function WorkflowItemInfo(name, displayName) {
 
 var _context = new org.mozilla.javascript.Context();
 var _logMarker = null;
+var _disableLogColor = false;
 
 var _SystemNS = function() {
 
@@ -372,7 +373,11 @@ _SystemNS.prototype = {
    * System.debug("This is a test");
    */
   debug : function(text) {
-    this._println("\u001B[32mDEBUG\u001B[0m", text);
+    if (_disableLogColor) {
+      this._println("DEBUG", text);
+    } else {
+      this._println("\u001B[32mDEBUG\u001B[0m", text);
+    }
   },
 
   /**
@@ -409,7 +414,11 @@ _SystemNS.prototype = {
    * System.error("This is a test");
    */
   error : function(text) {
-    this._println("\u001B[31mERROR\u001B[0m", text);
+    if (_disableLogColor) {
+      this._println("ERROR", text);
+    } else {
+      this._println("\u001B[31mERROR\u001B[0m", text);
+    }
   },
 
   /**
@@ -1513,7 +1522,11 @@ _SystemNS.prototype = {
    * System.log("This is a test");
    */
   log : function(text) {
-    this._println("\u001B[36mINFO\u001B[0m", text);
+    if (_disableLogColor) {
+      this._println("INFO", text);
+    } else {
+      this._println("\u001B[36mINFO\u001B[0m", text);
+    }
   },
 
   /**
@@ -1529,6 +1542,21 @@ _SystemNS.prototype = {
    */
   nextUUID : function() {
     return String(java.util.UUID.randomUUID().toString());
+  },
+
+  /**
+   * Logs a text in the standard output stream.
+   *
+   * @function print
+   * @param {string} text - Text to log.
+   *
+   * @example
+   * System.print("This is a test");
+   */
+  print : function(text) {
+    if (typeof text !== "undefined" && text !== null) {
+      this.stdout(String(text), false);
+    }
   },
 
   /**
@@ -1637,6 +1665,18 @@ _SystemNS.prototype = {
   },
 
   /**
+   * Sets whether color is used for log output.
+   *
+   * @function setDisableLogColor
+   @ @param {boolean} disableLogColor - Flag to use color in log output.
+   */
+  setDisableLogColor : function(disableLogColor) {
+    if (typeof disableLogColor === "boolean") {
+      _disableLogColor = disableLogColor;
+    }
+  },
+
+  /**
    * Sets additional log information.
    *
    * @function setLogMarker
@@ -1704,15 +1744,20 @@ _SystemNS.prototype = {
   },
 
   /**
-   * Logs a text in the standard output stream. Use this for debug only.
+   * Logs a text in the standard output stream.
    *
    * @function stdout
    * @param {string} text - Text to log.
+   * @param {boolean} terminateLine - Flag to terminate line with new line.
    *
    * @example
    * System.stdout("This is a test");
+   *
+   * @example
+   * System.stdout("This is a test without ", false);
+   * System.stdout("line termination");
    */
-  stdout : function(text) {
+  stdout : function(text, terminateLine) {
     var outText = null;
     if (typeof text === "undefined" || text === null) {
       outText = "";
@@ -1727,7 +1772,15 @@ _SystemNS.prototype = {
         );
       }
     }
-    java.lang.System.out.println(outText);
+    if (typeof terminateLine === "boolean") {
+      if (terminateLine === false) {
+        java.lang.System.out.print(outText);
+      } else {
+        java.lang.System.out.println(outText);
+      }
+    } else {
+      java.lang.System.out.println(outText);
+    }
   },
 
   /**
@@ -1912,7 +1965,11 @@ _SystemNS.prototype = {
    * System.warn("This is a test");
    */
   warn : function(text) {
-    this._println("\u001B[33mWARNING\u001B[0m", text);
+    if (_disableLogColor) {
+      this._println("WARNING", text);
+    } else {
+      this._println("\u001B[33mWARNING\u001B[0m", text);
+    }
   }
 
 };
