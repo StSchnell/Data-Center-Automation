@@ -2,11 +2,9 @@
  * Mock-up of the URL class from VMware Aria Automation.
  * Usable object to put/get http requests.
  *
- * Hint: The properties are accessed using getter and setter methods.
- *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.0
+ * @version 0.5.2
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine release 1.7.14 or higher.
@@ -28,17 +26,19 @@ var URL = function(url) {
   // possible from release 1.7.14.
   var rhinoVersion = System.getRhinoVersion();
   if (System.compareVersionNumber("1.7.13", rhinoVersion) === 1) {
-    throw new Error("This class can only be used with Rhino release 1.7.14");
+    throw new Error(
+      "This class can only be used with Rhino release 1.7.14"
+    );
   }
 
   this._url = null;
 
   if (
-    typeof url === "undefined" ||
-    url === null ||
-    String(url).trim() === ""
+    url == null ||
+    (typeof url === "string" && url.trim() === "")
   ) {
-    throw new Error("url argument can not be undefined or null");
+    throw new Error("url argument cannot be an empty string " +
+      "and cannot be null or undefined");
   }
   try {
     if (typeof url === "string") {
@@ -57,7 +57,7 @@ var URL = function(url) {
   this._requestType = "GET";
   this._receivedBuffer = null;
   this._header = [];
-  this._authorization = this._url.getAuthority();
+  this._authority = this._url.getAuthority();
   this._responseCode = 0;
   this._responseMessage = null;
 
@@ -74,6 +74,22 @@ URL.prototype = {
    * @param (string} value - The value of the key
    */
   addToHeader : function(key, value) {
+    if (
+      key == null ||
+      typeof key !== "string" ||
+      (typeof key === "string" && key.trim() === "")
+    ) {
+      throw new Error("key argument must be a non-empty string " +
+        "and cannot be null or undefined");
+    }
+    if (
+      value == null ||
+      typeof value !== "string" ||
+      (typeof value === "string" && value.trim() === "")
+    ) {
+      throw new Error("value argument must be a non-empty string " +
+        "and cannot be null or undefined");
+    }
     var obj = {};
     obj[key] = value;
     this._header.push(obj);
@@ -89,23 +105,23 @@ URL.prototype = {
    * @example
    * var urlObject = new URL("http://localhost/index.php");
    * urlObject.addParameter("test", "test")
-   * System.log(urlObject.getUrl());
+   * System.log(urlObject.url());
    * // http://localhost/index.php?test=test
    */
   addParameter : function(key, value) {
     if (
-      typeof key === "undefined" ||
-      key === null ||
-      String(key).trim() === ""
+      key == null ||
+      (typeof key === "string" && key.trim() === "")
     ) {
-      throw new Error("key argument can not be undefined or null");
+      throw new Error("key argument cannot be an empty string " +
+        "and cannot be null or undefined");
     }
     if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
+      value == null ||
+      (typeof value === "string" && value.trim() === "")
     ) {
-      throw new Error("value argument can not be undefined or null");
+      throw new Error("value argument cannot be an empty string " +
+        "and cannot be null or undefined");
     }
     try {
       var uri = this._url.toURI();
@@ -140,16 +156,16 @@ URL.prototype = {
    * @example
    * var urlObject = new URL("http://localhost");
    * urlObject.addPath("/index.php");
-   * System.log(urlObject.getUrl());
+   * System.log(urlObject.url());
    * // http://localhost/index.php
    */
   addPath : function(value) {
     if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
+      value == null ||
+      (typeof value === "string" && value.trim() === "")
     ) {
-      throw new Error("value argument can not be undefined or null");
+      throw new Error("value argument cannot be an empty string " +
+        "and cannot be null or undefined");
     }
     try {
       var uri = this._url.toURI();
@@ -188,6 +204,40 @@ URL.prototype = {
   },
 
   /**
+   * Gets or sets the content type.
+   *
+   * @function contentType
+   */
+  contentType : function(value) {
+    if (
+      value == null ||
+      typeof value !== "string" ||
+      (typeof value === "string" && value.trim() === "")
+    ) {
+      return this._contentType;
+    } else {
+      this._contentType = String(value);
+    }
+  },
+
+  /**
+   * Gets or sets the datas (content).<br>
+   *
+   * @function datas
+   */
+  datas : function(value) {
+    if (
+      value == null ||
+      typeof value !== "string" ||
+      (typeof value === "string" && value.trim() === "")
+    ) {
+      return this._datas;
+    } else {
+      this._datas = String(value);
+    }
+  },
+  
+  /**
    * Deletes a key from the HTTP header.<br>
    * Hint: This method is not available in standard.
    *
@@ -198,6 +248,24 @@ URL.prototype = {
     this._header.splice(this._header.indexOf(key), 1);
   },
 
+  /**
+   * Gets or sets the certificate validation in Java HTTPS connections.<br>
+   * Hint: This method is not available in standard.
+   *
+   * @function disableCertificateValidation
+   * @param {boolean} value
+   */
+  disableCertificateValidation : function(value) {
+    if(
+      typeof value !== "boolean" ||
+      value == null
+    ) {
+      return this._disableCertificateValidation;
+    } else {
+      this._disableCertificateValidation = value;
+    }
+  },
+  
   /**
    * Escapes the host if this is needed. Usually you need to escape<br>
    * IPv6 numeric addresses using brackets. If this host does not need<br>
@@ -214,6 +282,14 @@ URL.prototype = {
    */
   escapeHost : function(ipAddress) {
     if (
+      ipAddress == null ||
+      typeof ipAddress !== "string" ||
+      (typeof ipAddress === "string" && ipAddress.trim() === "")
+    ) {
+      throw new Error("ipAddress argument must be a non-empty string " +
+        "and cannot be null or undefined");
+    }
+    if (
       ipAddress.substring(0, 1) !== "[" &&
       ipAddress.substring(ipAddress.length - 1) !== "]"
     ) {
@@ -221,6 +297,16 @@ URL.prototype = {
     }
   },
 
+  /**
+   * Gets the authority part of the URL.<br>
+   * Hint: This method is not available in standard.
+   *
+   * @function getAuthority
+   */
+  getAuthority : function(value) {
+    return String(this._authority);
+  },
+  
   /**
    * Returns the class name.<br>
    * Hint: This method is a standard.
@@ -250,51 +336,6 @@ URL.prototype = {
    */
   getContent : function() {
     return this.postContent(null);
-  },
-
-  /**
-   * Gets the authority part of the URL.<br>
-   * Hint: This method is not available in standard.
-   *
-   * @function getAuthorization
-   */
-  getAuthorization : function() {
-    return String(this._authorization);
-  },
-
-  /**
-   * Gets the content type.<br>
-   * Hint: This is a getter method to the property contentType<br>
-   * which is not available in standard.
-   *
-   * @function getContentType
-   */
-  getContentType : function() {
-    return this._contentType;
-  },
-
-  /**
-   * Gets the datas (content).<br>
-   * Hint: This is a getter method to the property datas<br>
-   * which is not available in standard.
-   *
-   * @function getDatas
-   */
-  getDatas : function() {
-    return this._datas;
-  },
-
-  /**
-   * Returns the host.<br>
-   * Hint: This is a getter method to the property host<br>
-   * which is not available in standard.
-   *
-   * @function getHost
-   */
-  getHost : function() {
-    if (this._host !== null) {
-      return this._host;
-    }
   },
 
   /**
@@ -355,77 +396,16 @@ URL.prototype = {
   },
 
   /**
-   * Returns the port.<br>
-   * Hint: This is a getter method to the property port<br>
-   * which is not available in standard.
+   * Returns the host.
    *
-   * @function getPort
+   * @function host
    */
-  getPort : function() {
-    if (this._port !== null) {
-      return this._port;
+  host : function() {
+    if (this._host !== null) {
+      return this._host;
     }
   },
-
-  /**
-   * Returns the response code of the last http request.<br>
-   * Hint: This method is not available in standard.
-   *
-   * @function getResponseCode
-   */
-  getResponseCode : function() {
-    return this._responseCode;
-  },
-
-  /**
-   * Returns the response message of the last http request.<br>
-   * Hint: This method is not available in standard.
-   *
-   * @function getResponseMessage
-   */
-  getResponseMessage : function() {
-    return this._responseMessage;
-  },
-
-  /**
-   * Gets the request type (GET, PUT, POST or DELETE).<br>
-   * Hint: This is a getter method to the property requestType<br>
-   * which is not available in standard.
-   *
-   * @function getRequestType
-   */
-  getRequestType : function() {
-    return this._requestType;
-  },
-
-  /**
-   * Returns the result.<br>
-   * Hint: This is a getter method to the property result<br>
-   * which is not available in standard.
-   *
-   * @function getResult
-   */
-  getResult : function() {
-    if (this._receivedBuffer !== null) {
-      return String(this._receivedBuffer);
-    } else {
-      return null;
-    }
-  },
-
-  /**
-   * Returns the URL in the form of a String.<br>
-   * Hint: This is a getter method to the property url<br>
-   * which is not available in standard.
-   *
-   * @function getUrl
-   */
-  getUrl : function() {
-    if (this._url !== null) {
-      return String(this._url);
-    }
-  },
-
+  
   /**
    * Checks if the parameter is valid host name.
    *
@@ -440,11 +420,12 @@ URL.prototype = {
    */
   isValidHostname : function(hostname) {
     if (
-      typeof hostname === "undefined" ||
-      hostname === null ||
-      String(hostname).trim() === ""
+      hostname == null ||
+      typeof hostname !== "string" ||
+      (typeof hostname === "string" && hostname.trim() === "")
     ) {
-      throw new Error("hostname argument can not be undefined or null");
+      throw new Error("hostname argument must be a non-empty string " +
+        "and cannot be null or undefined");
     }
     var HOSTNAME_PATTERN =
       java.util.regex.Pattern.compile(this.getHostnamePatternStr(), 2);
@@ -461,14 +442,17 @@ URL.prototype = {
    */
   isValidHostnameOrIPAddress : function(hostOrIP) {
     if (
-      typeof hostOrIP === "undefined" ||
-      hostOrIP === null ||
-      String(hostOrIP).trim() === ""
+      hostOrIP == null ||
+      typeof hostOrIP !== "string" ||
+      (typeof hostOrIP === "string" && hostOrIP.trim() === "")
     ) {
-      throw new Error("hostOrIP argument can not be undefined or null");
+      throw new Error("hostOrIP argument must be a non-empty string " +
+        "and cannot be null or undefined");
     }
     var  HOSTNAME_OR_IP_PATTERN =
-      java.util.regex.Pattern.compile(this.getHostnameOrIPAddressPatternStr(), 2);
+      java.util.regex.Pattern.compile(
+        this.getHostnameOrIPAddressPatternStr(), 2
+      );
     return HOSTNAME_OR_IP_PATTERN.matcher(hostOrIP).matches();
   },
 
@@ -486,11 +470,12 @@ URL.prototype = {
    */
   isValidIPAddress : function(ipAddress) {
     if (
-      typeof ipAddress === "undefined" ||
-      ipAddress === null ||
-      String(ipAddress).trim() === ""
+      ipAddress == null ||
+      typeof ipAddress !== "string" ||
+      (typeof ipAddress === "string" && ipAddress.trim() === "")
     ) {
-      throw new Error("ipAddress argument can not be undefined or null");
+      throw new Error("ipAddress argument must be a non-empty string " +
+        "and cannot be null or undefined");
     }
     var IP_PATTERN =
       java.util.regex.Pattern.compile(this.getIPAddressPatternStr(), 2);
@@ -511,11 +496,12 @@ URL.prototype = {
    */
   isValidIPv4Address : function(ipAddress) {
     if (
-      typeof ipAddress === "undefined" ||
-      ipAddress === null ||
-      String(ipAddress).trim() === ""
+      ipAddress == null ||
+      typeof ipAddress !== "string" ||
+      (typeof ipAddress === "string" && ipAddress.trim() === "")
     ) {
-      throw new Error("ipAddress argument can not be undefined or null");
+      throw new Error("ipAddress argument must be a non-empty string " +
+        "and cannot be null or undefined");
     }
     var IPV4_PATTERN =
       java.util.regex.Pattern.compile(this.getIPv4AddressPatternStr(), 2);
@@ -536,17 +522,29 @@ URL.prototype = {
    */
   isValidIPv6Address : function(ipAddress) {
     if (
-      typeof ipAddress === "undefined" ||
-      ipAddress === null ||
-      String(ipAddress).trim() === ""
+      ipAddress == null ||
+      typeof ipAddress !== "string" ||
+      (typeof ipAddress === "string" && ipAddress.trim() === "")
     ) {
-      throw new Error("ipAddress argument can not be undefined or null");
+      throw new Error("ipAddress argument must be a non-empty string " +
+        "and cannot be null or undefined");
     }
     var IPV6_PATTERN =
       java.util.regex.Pattern.compile(this.getIPv6AddressPatternStr(), 2);
     return IPV6_PATTERN.matcher(ipAddress).matches();
   },
 
+  /**
+   * Returns the port.
+   *
+   * @function port
+   */
+  port : function() {
+    if (this._port !== null) {
+      return this._port;
+    }
+  },
+  
   /**
    * Posts the content defined in the datas property to the URL.
    *
@@ -555,9 +553,9 @@ URL.prototype = {
    *
    * @example
    * var urlObject = new URL("http://127.0.0.1:3000");
-   * urlObject.setRequestType("POST");
-   * urlObject.setContentType("application/json");
-   * urlObject.setDatas("{\"attributes\":{\"hostname\":\"localhost\"}}");
+   * urlObject.requestType("POST");
+   * urlObject.contentType("application/json");
+   * urlObject.datas("{\"attributes\":{\"hostname\":\"localhost\"}}");
    * var post = urlObject.post();
    */
   post : function() {
@@ -573,18 +571,65 @@ URL.prototype = {
    *
    * @example
    * var urlObject = new URL("http://127.0.0.1:3000");
-   * urlObject.setRequestType("POST");
-   * urlObject.setContentType("application/json");
+   * urlObject.requestType("POST");
+   * urlObject.contentType("application/json");
    * var content = "{\"attributes\":{\"ipaddress\":\"127.0.0.1\"}}";
    * var postContent = urlObject.postContent(content);
    */
   postContent : function(content) {
+
+    function disableCertificateValidation() {
+
+      // Create a trust manager that does not validate certificate chains
+      const x509TrustManager = new javax.net.ssl.X509TrustManager({
+        getAcceptedIssuers : function() {
+          return null;
+        },
+        checkClientTrusted : function(certs, authType) {
+        },
+        checkServerTrusted : function(certs, authType) {
+        }
+      });
+      const trustAllCerts = java.lang.reflect.Array.newInstance(
+        javax.net.ssl.TrustManager,
+        1
+      );
+      trustAllCerts[0] = x509TrustManager;
+
+      // Install the all-trusting trust manager
+      const sslContext = javax.net.ssl.SSLContext.getInstance("SSL");
+      sslContext.init(
+        null,
+        trustAllCerts,
+        new java.security.SecureRandom()
+      );
+      javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory(
+        sslContext.getSocketFactory()
+      );
+
+      // Create all-trusting host name verifier
+      const allHostsValid = new javax.net.ssl.HostnameVerifier({
+        verify : function(hostname, session) {
+          return true;
+        }
+      });
+
+      // Install the all-trusting host verifier, all hosts will be valid
+      javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+        allHostsValid
+      );
+
+    }
 
     this._receivedBuffer = new java.lang.StringBuffer();
     var urlConnection;
     var input;
 
     try {
+
+      if (this._disableCertificateValidation) {
+        disableCertificateValidation();
+      }
 
       urlConnection = this._url.openConnection();
       // java.net.HttpURLConnection is an abstract class, and
@@ -604,18 +649,20 @@ URL.prototype = {
       });
 
       // Set authorization
-      if (this._authorization != null) {
-        var headerAuthorization = java.util.Base64.getEncoder().encodeToString(
-          (this._authorization.split("@")[0]).getBytes("UTF-8")
-        );
+      if (this._authority.includes("@")) {
+        var headerAuthorization =
+          java.util.Base64.getEncoder().encodeToString(
+            (this._authority.split("@")[0]).getBytes("UTF-8")
+          );
         urlConnection.setRequestProperty(
           "Authorization", "Basic " + headerAuthorization
         );
       }
 
       if (content != null) {
-        var printout =
-          java.io.DataOutputStream(urlConnection.getOutputStream());
+        var printout = java.io.DataOutputStream(
+          urlConnection.getOutputStream()
+        );
         try {
           printout.writeBytes(content);
           printout.flush();
@@ -633,6 +680,7 @@ URL.prototype = {
         bufferedReader = new java.io.BufferedReader(
           new java.io.InputStreamReader(input)
         );
+        var line = null;
         while((line = bufferedReader.readLine()) !== null) {
           this._receivedBuffer.append(line + "\n");
         }
@@ -659,92 +707,56 @@ URL.prototype = {
   },
 
   /**
-   * Sets the authorization part of the URL.<br>
+   * Gets or sets the request type (GET, PUT, POST or DELETE).
+   *
+   * @function requestType
+   * @param {string} value - The request type
+   */
+  requestType : function(value) {
+    if (
+      value == null ||
+      typeof value !== "string" ||
+      (typeof value === "string" && value.trim() === "")
+    ) {
+      return this._requestType;
+    } else {
+      this._requestType = value;
+    }
+  },
+
+  /**
+   * Returns the response code of the last http request.<br>
    * Hint: This method is not available in standard.
    *
-   * @function setAuthorization
-   * @param {string} value
+   * @function responseCode
    */
-  setAuthorization : function(value) {
-    if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
-    ) {
-      throw new Error("value argument can not be undefined or null");
-    }
-    if (value != null) {
-      this._authorization = java.lang.String(value);
-    }
+  responseCode : function() {
+    return this._responseCode;
   },
 
   /**
-   * Sets the content type(content).<br>
-   * Hint: This is a setter method to the property contentType<br>
-   * which is not available in standard.
+   * Returns the response message of the last http request.<br>
+   * Hint: This method is not available in standard.
    *
-   * @function setContentType
-   * @param {string} value
+   * @function responseMessage
    */
-  setContentType : function(value) {
-    if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
-    ) {
-      throw new Error("value argument can not be undefined or null");
-    }
-    if (value != null) {
-      this._contentType = String(value);
-    }
+  responseMessage : function() {
+    return this._responseMessage;
   },
 
   /**
-   * Sets the datas (content).<br>
-   * Hint: This is a setter method to the property datas<br>
-   * which is not available in standard.
+   * Returns the result.<br>
    *
-   * @function setDatas
-   * @param {string} value
+   * @function result
    */
-  setDatas : function(value) {
-    if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
-    ) {
-      throw new Error("value argument can not be undefined or null");
-    }
-    if (value != null) {
-      this._datas = String(value);
+  result : function() {
+    if (this._receivedBuffer !== null) {
+      return String(this._receivedBuffer);
     } else {
-      this._datas = null;
-    } 
-  },
-
-  /**
-   * Sets the request type (GET, PUT, POST or DELETE).<br>
-   * Hint: This is a setter method to the property requestType<br>
-   * which is not available in standard.
-   *
-   * @function setRequestType
-   * @param {string} value
-   */
-  setRequestType : function(value) {
-    if (
-      typeof value === "undefined" ||
-      value === null ||
-      String(value).trim() === ""
-    ) {
-      throw new Error("value argument can not be undefined or null");
+      return null;
     }
-    if (value != null) {
-      this._requestType = value;
-    } else {
-      this._requestType = "GET";
-    } 
   },
-
+  
   /**
    * Un-escapes the host if this is IPv6 address in brackets. Usually<br>
    * you need to escape IPv6 numeric addresses using brackets but some<br>
@@ -766,6 +778,17 @@ URL.prototype = {
       ipAddress.substring(ipAddress.length - 1) === "]"
     ) {
       return ipAddress.substring(1, ipAddress.length - 1);
+    }
+  },
+
+  /**
+   * Returns the URL in the form of a String.
+   *
+   * @function url
+   */
+  url : function() {
+    if (this._url !== null) {
+      return String(this._url);
     }
   }
 
