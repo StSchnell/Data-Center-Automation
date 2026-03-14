@@ -9,7 +9,7 @@
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine release 1.7.14 or higher.
  *
- * Checked with Rhino engine version 1.7.14 and 1.7.15
+ * Checked with Rhino engine version 1.7.15 and 1.9.1
  *
  * @function URL
  * @param {object} url
