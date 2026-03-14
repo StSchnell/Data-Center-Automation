@@ -1,6 +1,4 @@
 
-// Begin ---------------------------------------------------------------
-
 /**
  * Mock-up of the Command class from VMware Aria Automation.
  * Builds a process object with the command to execute.
@@ -208,5 +206,3 @@ Command.prototype = {
   }
 
 };
-
-// End -----------------------------------------------------------------
