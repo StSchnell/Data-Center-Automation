@@ -10,16 +10,14 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.7.0
+ * @version 0.7.1
  *
  * Checked with ...
- * - Aria Automation 8.5.1, 8.12.2, 8.14.0, 8.16.2 and 8.18.1.
+ * - Aria Automation 8.5.1, 8.12.2, 8.14.0, 8.16.2 and 8.18.1
+ * - VCF Automation 9.0.0
  * Checked standalone with ...
- * - Windows 10, Windows 11 and RHEL 9.2.
- * - Rhino 1.7R4, 1.7.14, 1.7.15 and 1.8.0.
- * - Bellsoft JDK 11.0.23, Bellsoft JDK 17.0.11, Oracle OpenJDK 20.0.2,
- *   Bellsoft JDK 21.0.1, Bellsoft JDK 22.0.1, Bellsoft JDK 23.0.1 and
- *   Bellsoft JDK 24.
+ * - Rhino 1.7R4, 1.7.15 and 1.9.1
+ * - Bellsoft JDK 17.0.18 and Bellsoft JDK 21.0.10
  */
 
 var _assertNS = {
@@ -273,6 +271,9 @@ var _assertNS = {
     if (value.constructor) {
       return value.constructor.name === "RegExp";
     } else {
+      if (value.class) {
+        return value.class.name.includes("java.util.regex");
+      }
       return false;
     }
   },
@@ -1280,9 +1281,17 @@ var _assertNS = {
    */
   _passOut : function(text) {
     if (this.isUndefined(text)) {
-      System.log("Pass");
+      if (!this._disableLogColor) {
+        System.log("\u001b[37;1m\u001b[42m Pass \u001B[0m");
+      } else {
+        System.log("Pass");
+      }
     } else {
-      System.log("Pass: " + text);
+      if (!this._disableLogColor) {
+        System.log("\u001b[37;1m\u001b[42m Pass \u001B[0m " + text);
+      } else {
+        System.log("Pass: " + text);
+      }
     }
   },
 
@@ -1294,9 +1303,17 @@ var _assertNS = {
    */
   _failOut : function(text) {
     if (this.isUndefined(text)) {
-      System.log("Fail");
+      if (!this._disableLogColor) {
+        System.log("\u001b[37;1m\u001b[41;1m Fail \u001B[0m");
+      } else {
+        System.log("Fail");
+      }
     } else {
-      System.log("Fail: " + text);
+      if (!this._disableLogColor) {
+        System.log("\u001b[37;1m\u001b[41;1m Fail \u001B[0m " + text);
+      } else {
+        System.log("Fail: " + text);
+      }
     }
   },
 
@@ -1384,7 +1401,7 @@ var _assertNS = {
   },
 
   /**
-   * Standard classification of the runtimeCategory<br>
+   * Standard classification of the runtimeCategory.<br>
    * runtimeCategoryShort
    *
    * @name runtimeCategory
@@ -1401,7 +1418,7 @@ var _assertNS = {
   },
 
   /**
-   * Standard classification of the riskLevel<br>
+   * Standard classification of the riskLevel.<br>
    * riskLevelHarmless
    *
    * @name riskLevel
@@ -1415,6 +1432,18 @@ var _assertNS = {
 
   setRiskLevel : function(riskLevel) {
     this._riskLevel = riskLevel;
+  },
+
+  /**
+   * Sets whether color is used for log output.
+   *
+   * @name disableLogColor
+   * @type {boolean}
+   */
+  _disableLogColor: false,
+
+  setDisableLogColor : function(disableLogColor) {
+    this._disableLogColor = disableLogColor;
   }
 
 };
