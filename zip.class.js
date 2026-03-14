@@ -6,12 +6,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.0
+ * @version 0.2.1
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.15 and 1.8.0
+ * Checked with Rhino engines version 1.7R4, 1.7.15 and 1.9.1
  */
 
 var ZipWriter = function(file) {
@@ -28,8 +28,7 @@ var ZipWriter = function(file) {
    * zipWriter.writeZip();
    */
   if (
-    typeof file !== "undefined" &&
-    file !== null &&
+    file != null &&
     String(file).trim() !== ""
   ) {
     this.filename = file;
@@ -48,15 +47,13 @@ ZipWriter.prototype = {
    */
   addContent : function(entryName, content, encoding) {
     if (
-      entryName === "undefined" ||
-      entryName === null ||
+      entryName == null ||
       String(entryName).trim() === ""
     ) {
       throw new Error("entryName argument can not be undefined or null");
     }
     if (
-      content === "undefined" ||
-      content === null ||
+      content == null ||
       String(content).trim() === ""
     ) {
       throw new Error("content argument can not be undefined or null");
@@ -152,8 +149,7 @@ var ZipReader = function(file) {
    * java.lang.System.out.println(data);
    */
   if (
-    typeof file !== "undefined" &&
-    file !== null &&
+    file != null &&
     String(file).trim() !== ""
   ) {
     this.filename = file;
