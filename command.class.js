@@ -7,16 +7,14 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.0
+ * @version 0.3.1
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
  * Checked with ...
- * - Windows 10, Windows 11 and RHEL 9.2.
- * - Rhino 1.7R4, 1.7.14 and 1.7.15.
- * - Bellsoft JDK 11.0.23, Bellsoft JDK 17.0.11, Oracle OpenJDK 20.0.2,
- *   Bellsoft JDK 21.0.1 and Bellsoft JDK 22.0.1.
+ * - Rhino 1.7R4, 1.7.15 and 1.9.1.
+ * - Bellsoft JDK 17.0.11 and Bellsoft JDK 21.0.9.
  */
 
 /**
@@ -25,6 +23,7 @@
  * Command                        |         |     X    |     X     |       
  * execute                        | function|     X    |     X     |       
  * executeAndLog                  | function|     X    |     X     |       
+ * getClassName                   | function|     X    |     X     |        
  * input                          |attribute|     X    |     X     |       
  * output                         |attribute|     X    |     X     |       
  * result                         |attribute|     X    |     X     |       
@@ -68,8 +67,7 @@
 var Command = function(command) {
 
   if (
-    typeof command === "undefined" ||
-    command === null ||
+    command == null ||
     arguments.length === 0
   ) {
     throw new Error("command argument can not be undefined or null");
@@ -173,8 +171,7 @@ Command.prototype = {
   executeAndLog : function(filename) {
 
     if (
-      typeof filename === "undefined" ||
-      filename === null ||
+      filename == null ||
       String(filename).trim() === ""
     ) {
       throw new Error("filename argument can not be undefined or null");
