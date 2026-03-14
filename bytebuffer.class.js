@@ -5,12 +5,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.1.0
+ * @version 0.1.1
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
+ * Checked with Rhino engines version 1.7R4, 1.7.14, 1.7.15 and 1.9.1
  */
 
 var ByteBuffer = function(arg) {
@@ -27,29 +27,23 @@ var ByteBuffer = function(arg) {
     var contextFactory = org.mozilla.javascript.ContextFactory();
     context = contextFactory.getGlobal().enterContext();
 
-    if (typeof arg === "undefined" || arg === null) {
-
+    if (typeof arg == null) {
       this._byteBuffer = context.jsToJava(
         java.lang.String("").getBytes(),
         java.lang.Class.forName("[B")
       );
-
     } else if (typeof arg === "string") {
-
       this._byteBuffer = context.jsToJava(
         java.util.Base64.getDecoder().decode(
           java.lang.String(arg).getBytes()
         ),
         java.lang.Class.forName("[B")
       );
-
     } else if (
       typeof arg === "object" &&
       arg.getClassName() === "ByteBuffer"
     ) {
-
       this._byteBuffer = System.clone(arg);
-
     }
 
   } catch (exception) {
