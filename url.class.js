@@ -60,6 +60,7 @@ var URL = function(url) {
   this._authority = this._url.getAuthority();
   this._responseCode = 0;
   this._responseMessage = null;
+  this._disableCertificateValidation = false;
 
 };
 
@@ -773,6 +774,14 @@ URL.prototype = {
    * // 127.0.0.1
    */
   unescapeHost : function(ipAddress) {
+    if (
+      ipAddress == null ||
+      typeof ipAddress !== "string" ||
+      (typeof ipAddress === "string" && ipAddress.trim() === "")
+    ) {
+      throw new Error("ipAddress argument must be a non-empty string " +
+        "and cannot be null or undefined");
+    }
     if (
       ipAddress.substring(0, 1) === "[" &&
       ipAddress.substring(ipAddress.length - 1) === "]"
