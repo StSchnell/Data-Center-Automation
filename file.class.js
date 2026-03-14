@@ -208,7 +208,7 @@ File.prototype = {
  * @param file {string} - The file to access.
  */
 var FileReader = function(file) {
-  if (typeof file !== "undefined" && file !== null) {
+  if (file != null) {
     var f = java.io.File(file);
     this.exists = f.exists();
     this.path = file;
@@ -273,7 +273,7 @@ FileReader.prototype = {
  * @param file {string} - The file to access.
  */
 var FileWriter = function(file) {
-  if (typeof file !== "undefined" && file !== null) {
+  if (file != null) {
     var f = java.io.File(file);
     this.exists = f.exists();
     this.path = file;
@@ -424,7 +424,7 @@ FileHelper.prototype = {
    * @returns {boolean}
    */
   isAbsolutePath : function(path) {
-    if (typeof path !== "undefined" && path !== null && path.trim().length > 0) {
+    if (path != null && path.trim().length > 0) {
       var separatorPath = String(
         java.util.regex.Pattern.compile("\\\\").matcher(path).replaceAll("/")
       );
