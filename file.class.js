@@ -4,12 +4,12 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.1.3
+ * @version 0.1.4
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.0 and 1.8.1
+ * Checked with Rhino engines version 1.7R4, 1.7.15 and 1.9.1
  */
 
 /**
@@ -18,7 +18,7 @@
  * @param file {string} - The file to access.
  */
 var File = function(file) {
-  if (typeof file !== "undefined" && file !== null) {
+  if (file != null) {
     var f = java.io.File(file);
     this.directory = String(f.getParent());
     this.exists = f.exists();
@@ -65,7 +65,7 @@ File.prototype = {
    * @param targetName {string} - The target file.
    */
   copyTo : function(targetName) {
-    if (typeof targetName === "undefined" || targetName === null) {
+    if (targetName == null) {
       throw new Error("targetName argument can not be undefined or null");
     }
     java.nio.file.Files.copy(
@@ -154,7 +154,7 @@ File.prototype = {
       var fileList = null;
       var returnArray = [];
       fileList = file.list();
-      if (typeof extension === "undefined" && extension === null) {
+      if (extension == null) {
         fileList.forEach( function(item) {
           returnArray.push(String(item));
         });
@@ -176,7 +176,7 @@ File.prototype = {
    * @returns {boolean} - True if renaming succeeded, false otherwise.
    */
   renameTo : function(destPathName) {
-    if (typeof destPathName === "undefined" || destPathName === null) {
+    if (destPathName == null) {
       throw new Error("destPathName argument can not be undefined or null");
     }
     var file = java.io.File(this.path);
@@ -191,7 +191,7 @@ File.prototype = {
    * @param content {string} - The content to write.
    */
   write : function(content) {
-    if (typeof content === "undefined" || content === null) {
+    if (content == null) {
       throw new Error("content argument can not be undefined or null");
     }
     var fileWriter = java.io.FileWriter(java.io.File(this.path));
@@ -330,7 +330,7 @@ FileWriter.prototype = {
    * @param value {string} - The string to write.
    */
   write : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       throw new Error("value argument can not be undefined or null");
     }
     this._fileWriter.write(String(value));
@@ -342,7 +342,7 @@ FileWriter.prototype = {
    * @param value {string} - The line to write.
    */
   writeLine : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       throw new Error("value argument can not be undefined or null");
     }
     switch (this.lineEndType) {
