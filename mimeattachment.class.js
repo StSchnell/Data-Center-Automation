@@ -4,19 +4,18 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.2.1
+ * @version 0.2.2
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.14 and 1.7.15
+ * Checked with Rhino engines version 1.7R4, 1.7.15 and 1.9.1
  */
 
 var MimeAttachment = function(file) {
 
   if (
-    typeof file !== "undefined" &&
-    file !== null &&
+    file != null &&
     String(file).trim() !== ""
   ) {
 
@@ -59,7 +58,7 @@ MimeAttachment.prototype = {
    * @function write
    * @param {string} directory - Directory where to store the file.
    * @param {string} filename - Optional filename<br>
-   *   (if null, use the mime attachment name)
+   *   (if null, it uses the mime attachment name)
    * @returns {File}
    */
   write : function(directory, filename) {
@@ -69,16 +68,14 @@ MimeAttachment.prototype = {
     try {
 
       if (
-        typeof directory === "undefined" ||
-        directory === null ||
+        directory == null ||
         String(directory).trim() === ""
       ) {
         throw new Error("directory argument can not be undefined or null");
       }
 
       if (
-        typeof filename === "undefined" ||
-        filename === null ||
+        filename == null ||
         String(filename).trim() === ""
       ) {
         filename = this.name;
