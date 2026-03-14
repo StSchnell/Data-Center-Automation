@@ -27,7 +27,7 @@ var ByteBuffer = function(arg) {
     var contextFactory = org.mozilla.javascript.ContextFactory();
     context = contextFactory.getGlobal().enterContext();
 
-    if (typeof arg == null) {
+    if (arg == null) {
       this._byteBuffer = context.jsToJava(
         java.lang.String("").getBytes(),
         java.lang.Class.forName("[B")
