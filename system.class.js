@@ -23,6 +23,7 @@
 /**
  * URL class,
  * mock-up of VCF Automation URL class, only attributes.
+ *
  * Hint: This mock-up is not necessary when using url.class.js.
  */
 if (typeof URL === "undefined") {
