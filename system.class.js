@@ -12,27 +12,30 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.8
+ * @version 0.3.11
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
  *
- * Checked with Rhino engines version 1.7R4, 1.7.15, 1.8.1 and 1.9.0
+ * Checked with Rhino engines version 1.7R4, 1.7.15 and 1.9.1
  */
 
 /**
  * URL class,
  * mock-up of VCF Automation URL class, only attributes.
+ * Hint: This mock-up is not necessary when using url.class.js.
  */
-function URL() {
-  // this.contentType = "application/x-www-form-urlencoded";
-  this.contentType = "text/plain";
-  this.datas = null;
-  this.host = "localhost";
-  this.port = 443;
-  this.requestType = "GET";
-  this.result = "This is a mock-up of URL";
-  this.url = "https://localhost/";
+if (typeof URL === "undefined") {
+  function URL() {
+    // this.contentType = "application/x-www-form-urlencoded";
+    this.contentType = "text/plain";
+    this.datas = null;
+    this.host = "localhost";
+    this.port = 443;
+    this.requestType = "GET";
+    this.result = "This is a mock-up of URL";
+    this.url = "http://localhost/";
+  }
 }
 
 /**
@@ -93,7 +96,7 @@ _SystemNS.prototype = {
    */
   _println : function(prefix, text) {
     var outText = null;
-    if (typeof text === "undefined" || text === null) {
+    if (text == null) {
       outText = "";
     } else {
       var rhinoVersion = this.getRhinoVersion();
@@ -129,8 +132,7 @@ _SystemNS.prototype = {
    */
   alert : function(message) {
     if (
-      typeof message === "undefined" ||
-      message === null ||
+      message == null ||
       String(message).trim() === ""
     ) {
       javax.swing.JOptionPane.showMessageDialog(
@@ -164,15 +166,13 @@ _SystemNS.prototype = {
    */
   appendToPath : function(root, toAdd) {
     if (
-      typeof root === "undefined" ||
-      root === null ||
+      root == null ||
       String(root).trim() === ""
     ) {
       throw new Error("root argument can not be undefined or null");
     }
     if (
-      typeof toAdd === "undefined" ||
-      toAdd === null ||
+      toAdd == null ||
       String(toAdd).trim() === ""
     ) {
       throw new Error("toAdd argument can not be undefined or null");
@@ -191,7 +191,7 @@ _SystemNS.prototype = {
    * @returns {string}
    */
   base64ToString : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       throw new Error("value argument can not be undefined or null");
     }
     return String(java.lang.String(
@@ -209,7 +209,7 @@ _SystemNS.prototype = {
    * @returns {object}
    */
   clone : function(object) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     if (typeof object === "object") {
@@ -239,15 +239,13 @@ _SystemNS.prototype = {
    */
   compareVersionNumber : function(version1, version2) {
     if (
-      typeof version1 === "undefined" ||
-      version1 === null ||
+      version1 == null ||
       String(version1).trim() === ""
     ) {
       throw new Error("version1 argument can not be undefined or null");
     }
     if (
-      typeof version2 === "undefined" ||
-      version2 === null ||
+      version2 == null ||
       String(version2).trim() === ""
     ) {
       throw new Error("version2 argument can not be undefined or null");
@@ -308,13 +306,12 @@ _SystemNS.prototype = {
    */
   customEventUrl : function(eventName, secure) {
     if (
-      typeof eventName === "undefined" ||
-      eventName === null ||
+      eventName == null ||
       String(eventName).trim() === ""
     ) {
       throw new Error("eventName argument can not be undefined or null");
     }
-    var url = new URL(); // Mock-up URL object
+    var url = new URL(); // URL object from url.class.js
     url.port = 8280;
     url.contentType = "application/x-www-form-urlencoded";
     return url;
@@ -336,27 +333,24 @@ _SystemNS.prototype = {
    */
   customEventUrlforServer : function(eventName, host, port, secure) {
     if (
-      typeof eventName === "undefined" ||
-      eventName === null ||
+      eventName == null ||
       String(eventName).trim() === ""
     ) {
       throw new Error("eventName argument can not be undefined or null");
     }
     if (
-      typeof host === "undefined" ||
-      host === null ||
+      host == null ||
       String(host).trim() === ""
     ) {
       throw new Error("host argument can not be undefined or null");
     }
     if (
-      typeof port === "undefined" ||
-      port === null ||
+      port == null ||
       String(port).trim() === ""
     ) {
       throw new Error("port argument can not be undefined or null");
     }
-    var url = new URL(); // Mock-up URL object
+    var url = new URL(); // URL object from url.class.js
     url.host = host.toString();
     url.port = port.toString();
     url.contentType = "application/x-www-form-urlencoded";
@@ -444,8 +438,7 @@ _SystemNS.prototype = {
    */
   exec : function(command) {
     if (
-      typeof command === "undefined" ||
-      command === null ||
+      command == null ||
       String(command).trim() === ""
     ) {
       throw new Error("command argument can not be undefined or null");
@@ -483,8 +476,7 @@ _SystemNS.prototype = {
    */
   extractDirectory : function(fullPath) {
     if (
-      typeof fullPath === "undefined" ||
-      fullPath === null ||
+      fullPath == null ||
       String(fullPath).trim() === ""
     ) {
       throw new Error("fullPath argument can not be undefined or null");
@@ -512,8 +504,7 @@ _SystemNS.prototype = {
    */
   extractFileName : function(fullPath) {
     if (
-      typeof fullPath === "undefined" ||
-      fullPath === null ||
+      fullPath == null ||
       String(fullPath).trim() === ""
     ) {
       throw new Error("fullPath argument can not be undefined or null");
@@ -540,8 +531,7 @@ _SystemNS.prototype = {
    */
   extractFileNameExtension : function(fullPath) {
     if (
-      typeof fullPath === "undefined" ||
-      fullPath === null ||
+      fullPath == null ||
       String(fullPath).trim() === ""
     ) {
       throw new Error("fullPath argument can not be undefined or null");
@@ -568,8 +558,7 @@ _SystemNS.prototype = {
    */
   extractFileNameWithoutExtension : function(fullPath) {
     if (
-      typeof fullPath === "undefined" ||
-      fullPath === null ||
+      fullPath == null ||
       String(fullPath).trim() === ""
     ) {
       throw new Error("fullPath argument can not be undefined or null");
@@ -606,12 +595,11 @@ _SystemNS.prototype = {
    * }
    */
   filterAuthorized : function(source, authorized) {
-    if (typeof source === "undefined" || source === null) {
+    if (source == null) {
       throw new Error("source argument can not be undefined or null");
     }
     if (
-      typeof authorized === "undefined" ||
-      authorized === null ||
+      authorized == null ||
       authorized === true
     ) {
       return source;
@@ -653,7 +641,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   formatBinaryValue : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       return null;
     }
     var newValue = parseFloat(value.toString());
@@ -696,8 +684,7 @@ _SystemNS.prototype = {
     if (
       !(date instanceof Date) ||
       isNaN(date) ||
-      typeof date === "undefined" ||
-      date === null
+      date == null
     ) {
       throw new Error(
         "date argument must be Date and can not be undefined or null"
@@ -747,8 +734,7 @@ _SystemNS.prototype = {
     var retValue = "";
 
     if (
-      typeof milliseconds === "undefined" ||
-      milliseconds === null ||
+      milliseconds == null ||
       typeof milliseconds !== "number"
     ) {
       throw new Error(
@@ -841,7 +827,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   formatNumber : function(aNumber, pattern) {
-    if (typeof aNumber === "undefined" || aNumber === null) {
+    if (aNumber == null) {
       throw new Error(
         "aNumber argument must be Number and can not be undefined or null"
       );
@@ -961,8 +947,7 @@ _SystemNS.prototype = {
    */
   getDate : function(input, refDate) {
     if (
-      typeof input === "undefined" ||
-      input === null ||
+      input == null ||
       String(input).trim() === ""
     ) {
       throw new Error("input argument can not be undefined or null");
@@ -1001,8 +986,7 @@ _SystemNS.prototype = {
    */
   getDateFromFormat : function(date, pattern) {
     if (
-      typeof date === "undefined" ||
-      date === null ||
+      date == null ||
       String(date).trim() === ""
     ) {
       throw new Error("date argument can not be undefined or null");
@@ -1045,21 +1029,14 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   getModule : function(object) {
-    if (typeof object === "undefined" || object === null) {
+    if (
+      typeof object !== "object" ||
+      object === null ||
+      Array.isArray(object)
+    ) {
       throw new Error("object argument can not be undefined or null");
     }
-
-    // Creates a new JavaScript object by executing the named constructor
-    // var context = new org.mozilla.javascript.Context();
-    // var cx = context.enter();
-    // var scope = cx.initStandardObjects();
-    // var result = cx.newObject(scope, "Object", [ object ]);
-    // cx.exit();
-    // return result;
-
-    if (typeof object === "object") {
-      return Object.create(object);
-    }
+    return Object.create(object);
   },
 
   /**
@@ -1103,7 +1080,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   getObjectClassName : function(object) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     try {
@@ -1129,7 +1106,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   getObjectId : function(object, getId) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     var idValue = "";
@@ -1158,7 +1135,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   getObjectPluginName : function(object, getPluginName) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     var pluginNameValue = "";
@@ -1187,7 +1164,7 @@ _SystemNS.prototype = {
    * System.log(result);
    */
   getObjectType : function(object, getType) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     var typeValue = "";
@@ -1411,8 +1388,7 @@ _SystemNS.prototype = {
    */
   isHostReachable : function(hostOrIp, timeout) {
     if (
-      typeof hostOrIp === "undefined" ||
-      hostOrIp === null ||
+      hostOrIp == null ||
       String(hostOrIp).trim() === ""
     ) {
       throw new Error("hostOrIp argument can not be undefined or null");
@@ -1480,7 +1456,7 @@ _SystemNS.prototype = {
    * @returns {boolean}
    */
   isNotFound : function(object, shallNotBeFound) {
-    if (typeof object === "undefined" || object === null) {
+    if (object == null) {
       throw new Error("object argument can not be undefined or null");
     }
     var notFoundValue = false;
@@ -1545,6 +1521,19 @@ _SystemNS.prototype = {
   },
 
   /**
+   * @function pojoToString
+   * @param {object} any
+   * @returns {string}
+   */
+  pojoToString : function(any) {
+    if (any == null) {
+      throw new Error("any argument can not be undefined or null");
+    }
+
+    return "";
+  },
+  
+  /**
    * Logs a text in the standard output stream.
    *
    * @function print
@@ -1560,19 +1549,6 @@ _SystemNS.prototype = {
   },
 
   /**
-   * @function pojoToString
-   * @param {object} any
-   * @returns {string}
-   */
-  pojoToString : function(any) {
-    if (typeof any === "undefined" || any === null) {
-      throw new Error("any argument can not be undefined or null");
-    }
-
-    return "";
-  },
-
-  /**
    * Returns the IP address of the host name.
    *
    * @function resolveHostName
@@ -1584,8 +1560,7 @@ _SystemNS.prototype = {
    */
   resolveHostName : function(hostName) {
     if (
-      typeof hostName === "undefined" ||
-      hostName === null ||
+      hostName == null ||
       String(hostName).trim() === ""
     ) {
       throw new Error("hostName argument can not be undefined or null");
@@ -1616,8 +1591,7 @@ _SystemNS.prototype = {
    */
   resolveIpAddress : function(ipAddress) {
     if (
-      typeof ipAddress === "undefined" ||
-      ipAddress === null ||
+      ipAddress == null ||
       String(ipAddress).trim() === ""
     ) {
       throw new Error("ipAddress argument can not be undefined or null");
@@ -1641,8 +1615,7 @@ _SystemNS.prototype = {
    */
   sendCustomEvent : function(eventKey) {
     if (
-      typeof eventKey === "undefined" ||
-      eventKey === null ||
+      eventKey == null ||
       String(eventKey).trim() === ""
     ) {
       throw new Error("eventKey argument can not be undefined or null");
@@ -1658,7 +1631,7 @@ _SystemNS.prototype = {
    * @param {object} context
    */
   setContext : function(context) {
-    if (typeof context === "undefined" || context === null) {
+    if (context == null) {
       throw new Error("context argument can not be undefined or null");
     }
     _context = context;
@@ -1668,7 +1641,7 @@ _SystemNS.prototype = {
    * Sets whether color is used for log output.
    *
    * @function setDisableLogColor
-   @ @param {boolean} disableLogColor - Flag to use color in log output.
+   * @param {boolean} disableLogColor - Flag to use color in log output.
    */
   setDisableLogColor : function(disableLogColor) {
     if (typeof disableLogColor === "boolean") {
@@ -1727,7 +1700,7 @@ _SystemNS.prototype = {
    */
   stderr : function(text) {
     var outText = null;
-    if (typeof text === "undefined" || text === null) {
+    if (text == null) {
       outText = "";
     } else {
       var rhinoVersion = this.getRhinoVersion();
@@ -1759,7 +1732,7 @@ _SystemNS.prototype = {
    */
   stdout : function(text, terminateLine) {
     var outText = null;
-    if (typeof text === "undefined" || text === null) {
+    if (text == null) {
       outText = "";
     } else {
       var rhinoVersion = this.getRhinoVersion();
@@ -1792,7 +1765,7 @@ _SystemNS.prototype = {
    * @returns {string}
    */
   stringToBase64 : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       throw new Error("value argument can not be undefined or null");
     }
     return String(
@@ -1808,7 +1781,7 @@ _SystemNS.prototype = {
    * @returns {object}
    */
   stringToPojo : function(value) {
-    if (typeof value === "undefined" || value === null) {
+    if (value == null) {
       throw new Error("value argument can not be undefined or null");
     }
 
@@ -1850,22 +1823,19 @@ _SystemNS.prototype = {
    */
   waitCustomEventUntil : function(id, name, endDate) {
     if (
-      typeof id === "undefined" ||
-      id === null ||
+      id == null ||
       String(id).trim() === ""
     ) {
       throw new Error("id argument can not be undefined or null");
     }
     if (
-      typeof name === "undefined" ||
-      name === null ||
+      name == null ||
       String(name).trim() === ""
     ) {
       throw new Error("name argument can not be undefined or null");
     }
     if (
-      typeof endDate === "undefined" ||
-      endDate === null ||
+      endDate == null ||
       !(endDate instanceof Date) ||
       isNaN(endDate)
     ) {
@@ -1885,15 +1855,13 @@ _SystemNS.prototype = {
    */
   waitTriggerEvent : function(id, name, checkPeriod) {
     if (
-      typeof id === "undefined" ||
-      id === null ||
+      id == null ||
       String(id).trim() === ""
     ) {
       throw new Error("id argument can not be undefined or null");
     }
     if (
-      typeof name === "undefined" ||
-      name === null ||
+      name == null ||
       String(name).trim() === ""
     ) {
       throw new Error("name argument can not be undefined or null");
@@ -1930,8 +1898,7 @@ _SystemNS.prototype = {
     if (
       !(waitDate instanceof Date) ||
       isNaN(waitDate) ||
-      typeof waitDate === "undefined" ||
-      waitDate === null
+      waitDate == null
     ) {
       throw new Error(
         "waitDate argument must be Date and can not be undefined or null"
