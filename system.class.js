@@ -12,7 +12,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.3.11
+ * @version 0.3.12
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine.
@@ -1032,7 +1032,7 @@ _SystemNS.prototype = {
   getModule : function(object) {
     if (
       typeof object !== "object" ||
-      object === null ||
+      object == null ||
       Array.isArray(object)
     ) {
       throw new Error("object argument can not be undefined or null");
