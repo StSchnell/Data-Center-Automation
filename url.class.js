@@ -4,7 +4,7 @@
  *
  * @author Stefan Schnell <mail@stefan-schnell.de>
  * @license MIT
- * @version 0.5.2
+ * @version 0.5.3
  *
  * Hint: This mock-up works only with the Mozilla Rhino JavaScript
  * engine release 1.7.14 or higher.
@@ -41,11 +41,7 @@ var URL = function(url) {
       "and cannot be null or undefined");
   }
   try {
-    if (typeof url === "string") {
-      this._url = java.net.URI(url.toString()).toURL();
-    } else {
-      this._url = java.net.URI("http://localhost/").toURL();
-    }
+    this._url = java.net.URI(url.toString()).toURL();
   } catch (exception) {
     throw new Error(exception.message);
   }
@@ -682,8 +678,9 @@ URL.prototype = {
           new java.io.InputStreamReader(input)
         );
         var line = null;
+        const lineSeparator = java.lang.System.lineSeparator()
         while((line = bufferedReader.readLine()) !== null) {
-          this._receivedBuffer.append(line + "\n");
+          this._receivedBuffer.append(line).append(lineSeparator);
         }
       } finally {
         if (bufferedReader !== null) {
